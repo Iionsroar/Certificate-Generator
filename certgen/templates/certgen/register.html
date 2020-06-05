@@ -1,0 +1,11 @@
+{% extends 'certgen/header.html' %}
+
+{% block content %}
+    <br>
+    <form method="POST">
+        {%csrf_token%}
+        {{form.as_p}}
+        <button class="button is-danger is-outlined" type="submit">Sign up</button>
+    </form>
+    <p>If you already have an account, <a href="login/"><strong>login</strong></a> instead.</p>
+{% endblock %}

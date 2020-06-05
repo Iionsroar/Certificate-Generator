@@ -1,0 +1,10 @@
+{% extends 'certgen/header.html' %}
+
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="button is-danger is-outlined">Login</button>
+    </form>
+    <p>Doesn't have an account? <a href="register/">Register.</a></p>
+{% endblock %}

@@ -32,7 +32,7 @@
     }
     div.la-absolute-centered {
         position: absolute;
-        top: 40%;
+        top: 35%;
         left: 20%;
         right: 20%;
     }
@@ -68,17 +68,22 @@
     div.la-drag-drop {
         border: dashed 3px rgb(170, 202, 177);
         border-radius: 5px;
-        padding-top: 15px;
-        padding-bottom: 15px;
+        padding: 5%;
         color: rgb(170, 202, 177);
     }
     .la-is-mint {
-        background-color: rgb(170, 202, 177);
+        background-color: rgb(170, 202, 177) !important;
+        /* used !important since bulma's tag class overrides this style */
     }
+    .tag.la-is-mint {
+        border-radius: 0;
+    }
+    /* =============================================*/
     .la-has-text-white {
         color: white;
     }
     .la-has-text-white:hover {
         color: black;
     }
+
 </style>

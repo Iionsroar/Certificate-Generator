@@ -25,7 +25,7 @@
     div.la-relative {
         position: relative;
     }
-    div.la-absolute {
+    div.la-absolute-upperleft {
         position: absolute;
         top: 0;
         left: 0;
@@ -41,33 +41,44 @@
         border-width: 3px;
         border-color: rgb(170, 202, 177);
     }
-    div.la-card-border-1 {
-        border-style: solid;
-        border-width: 1px;
+    .la-card-divider {
+        border-top-width: 1px;
+        border-top-style: solid;
         border-color: rgb(170, 202, 177);
     }
     .la-has-text-mint {
         color: rgb(170, 202, 177);
     }
-    input.la-is-mint {
-        background-color: rgb(170, 202, 177);
+    /*=============== colored textbox ===============*/
+    input.la-textbox {
         color: white;
         width: 75%;
         text-align: center;
         outline-style: none;
         outline-color: black;
     }
-    input.la-is-mint::placeholder {
+    input.la-textbox::placeholder {
         color: white;
     }
-    input.la-is-mint:focus {
+    input.la-textbox:focus {
         border-color: rgb(170, 202, 177);
         box-shadow: none;
     }
+    /*===============================================*/
     div.la-drag-drop {
         border: dashed 3px rgb(170, 202, 177);
-        color: rgb(170, 202, 177);
+        border-radius: 5px;
         padding-top: 15px;
         padding-bottom: 15px;
+        color: rgb(170, 202, 177);
+    }
+    .la-is-mint {
+        background-color: rgb(170, 202, 177);
+    }
+    .la-has-text-white {
+        color: white;
+    }
+    .la-has-text-white:hover {
+        color: black;
     }
 </style>

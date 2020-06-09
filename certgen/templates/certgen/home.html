@@ -28,24 +28,30 @@
           <img src="" alt="Names">
           <div class="la-drag-drop has-text-centered la-absolute-centered">Drop image here</div>
         </figure>
-        <div class="has-text-weight-normal la-absolute">
+        <div class="has-text-weight-normal la-absolute-upperleft">
           <span class="tag is-large has-text-white" style="background-color: rgb(170, 202, 177); border-radius:0;">
             Certificate Template
           </span>
         </div>
       </div>
 
-      <div class="card-content la-card-border-1">
+      <div class="card-content la-card-divider">
         <div class="content has-text-centered">
           <a href="" class="is-size-4 la-has-text-mint">Choose Photo</a>
           <p class="la-has-text-mint">--- or ---</p>
-          <input type="text" class="input is-size-7 la-is-mint" placeholder="Paste image URL here">
+          <input type="text" class="input is-size-7 la-textbox la-is-mint" placeholder="Paste image URL here">
         </div>
         <!-- div.content for spacing; perhaps search for other ways and exclude this from code -->
         <div class="content"></div>
       </div>
 
     </div>
+    <div class="has-text-weight-normal">
+      <span class="tag is-large" style="background-color: rgb(170, 202, 177); border-radius:0;">
+        <a href="" class="la-has-text-white">POSITION PLACEHOLDER</a>
+      </span>
+    </div>
+
   </div>
 
   <div class="column is-4">
@@ -55,23 +61,28 @@
         <figure class="image is-3by2">
           <img src="{% static 'certgen/certificate_template_2.png' %}" alt="Names">
         </figure>
-        <div class="has-text-weight-normal la-absolute">
+        <div class="has-text-weight-normal la-absolute-upperleft">
           <span class="tag is-large has-text-white" style="background-color: rgb(170, 202, 177); border-radius:0;">
             File containing Names
           </span>
         </div>
       </div>
 
-      <div class="card-content la-card-border-1">
+      <div class="card-content la-card-divider">
         <div class="content has-text-centered">
           <a href="" class="is-size-4 la-has-text-mint">Choose File</a>
           <p class="la-has-text-mint">--- or ---</p>
-          <input type="text" class="input is-size-7 la-is-mint" placeholder="Paste names here">
+          <input type="text" class="input is-size-7 la-textbox la-is-mint" placeholder="Paste names here">
         </div>
         <!-- div.content for spacing; perhaps search for other ways and exclude this from code -->
         <div class="content"></div>
       </div>
 
+    </div>
+    <div class="has-text-weight-normal is-pulled-right">
+      <div class="tag is-large" style="background-color: rgb(170, 202, 177); border-radius:0;">
+        <a href="" class="la-has-text-white">GENERATE</a>
+      </div>
     </div>
 
   </div>

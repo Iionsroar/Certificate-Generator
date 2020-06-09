@@ -3,14 +3,43 @@ from django.http import HttpResponse
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
-from .models import Tutorial
+from .models import Tutorial, TutorialSeries, TutorialCategory
 from .forms import NewUserForm
 
 # Create your views here.
+def single_slug(request, single_slug):
+    categories = [c.category_slug for c in TutorialCategory.objects.all()]
+    if single_slug in categories:
+        series_match = TutorialSeries.objects.filter(tutorial_category__category_slug=single_slug)
+
+        series_urls = {}
+        for m in series_match:
+            part_one = Tutorial.objects.filter(tutorial_series__tutorial_series=m.tutorial_series).earliest("published")
+            series_urls[m] = part_one.tutorial_slug
+
+        return render(request,
+                      "certgen/series.html",
+                      {'part_ones': series_urls})
+
+    tutorials = [t.tutorial_slug for t in Tutorial.objects.all()]
+    if single_slug in tutorials:
+        this_tutorial = Tutorial.objects.get(tutorial_slug=single_slug)
+        tutorials_from_series = Tutorial.objects.filter(tutorial_series__tutorial_series=this_tutorial.tutorial_series).order_by('published')
+        this_tutorial_idx = list(tutorials_from_series).index(this_tutorial)
+        return render(request,
+                      'certgen/tutorial.html',
+                      {'tutorial': this_tutorial,
+                      'sidebar': tutorials_from_series,
+                      'this_tutorial_idx': this_tutorial_idx})
+
+    return HttpResponse(f'{single_slug} does not exist.')
+
+
 def homepage(request):
     return render(request,
                   'certgen/home.html',
-                  {'tutorials': Tutorial.objects.all})
+                  {'categories': TutorialCategory.objects.all})
+
 
 def register(request):
     if request.method == "POST":

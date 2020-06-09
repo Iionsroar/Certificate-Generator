@@ -28,7 +28,15 @@ print(certificate.fields) # view fields on certificate object
 certificate.generate() # generate certificate file and save
 certificate.openImg() # open generated certificate file
 ```
-
+##### Output:
+```
+src/certificate_template_1.png
+Draco Malfoy
+Certificate-Draco-Malfoy.png
+src/Merriweather-Bold.ttf 42
+635
+['src/certificate_template_1.png', 'Draco Malfoy', 'Certificate-Draco-Malfoy.png', 'src/Merriweather-Bold.ttf', 42, 635]
+```
 
 ## Certificates class
 ##### Create a certificates object with fields that provide information such as:
@@ -50,4 +58,8 @@ certificates.openImgs() # open all certificates
 from time import sleep
 sleep(20)
 certificates.closeImgs() # close all certificates
+```
+##### Output:
+```
+['Certificate-Names.png', 'Certificate-Himejima-Gyoumei.png', 'Certificate-Iguro-Obanai.png', 'Certificate-Mitsuri-Kanroji.png', 'Certificate-Tomioka-Giyuu.png', 'Certificate-Shinobu-Kocho.png', 'Certificate-Shinazugawa-Sanemi.png', 'Certificate-Kyojuro-Rengoku.png', 'Certificate-Tengen-Uzui.png', 'Certificate-Muichiro-Tokito.png']
 ```

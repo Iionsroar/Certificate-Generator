@@ -1,0 +1,89 @@
+{% load static %}
+<!-- Prism CSS -->
+<!-- <link href="{% static 'tinymce/css/prism.css' %}" rel="stylesheet"> -->
+
+<!-- Compiled and minified CSS -->
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"> -->
+
+<!-- Compiled and minified JavaScript for Materialize CSS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+<!-- Compiled and minified CSS for BULMA -->
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css"> -->
+<link rel="stylesheet" href="{% static 'certgen/bulma.min.css' %}">
+
+<!-- Font Family -->
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Text&family=Lora:wght@562&family=Montserrat:wght@300&display=swap" rel="stylesheet">
+
+<!-- Fontawesome -->
+<link rel="stylesheet" href="{% static 'certgen/fontawesome/css/all.css' %}">
+<link rel="stylesheet" href="{% static 'certgen/fontawesome/css/bulma.min.css' %}">
+<link rel="stylesheet" href="{% static 'certgen/fontawesome/css/all.min.css' %}">
+
+<!-- move to a css file after -->
+<style>
+    div.la-relative {
+        position: relative;
+    }
+    div.la-absolute-upperleft {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    div.la-absolute-centered {
+        position: absolute;
+        top: 35%;
+        left: 20%;
+        right: 20%;
+    }
+    div.la-card-border-3 {
+        border-style: solid;
+        border-width: 3px;
+        border-color: rgb(170, 202, 177);
+    }
+    .la-card-divider {
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-color: rgb(170, 202, 177);
+    }
+    .la-has-text-mint {
+        color: rgb(170, 202, 177);
+    }
+    /*=============== colored textbox ===============*/
+    input.la-textbox {
+        color: white;
+        width: 75%;
+        text-align: center;
+        outline-style: none;
+        outline-color: black;
+    }
+    input.la-textbox::placeholder {
+        color: white;
+    }
+    input.la-textbox:focus {
+        border-color: rgb(170, 202, 177);
+        box-shadow: none;
+    }
+    /*===============================================*/
+    div.la-drag-drop {
+        border: dashed 3px rgb(170, 202, 177);
+        border-radius: 5px;
+        padding: 5%;
+        color: rgb(170, 202, 177);
+    }
+    .la-is-mint {
+        background-color: rgb(170, 202, 177) !important;
+        /* used !important since bulma's tag class overrides this style */
+    }
+    .tag.la-is-mint {
+        border-radius: 0;
+    }
+    /* =============================================*/
+    .la-has-text-white {
+        color: white;
+    }
+    .la-has-text-white:hover {
+        color: black;
+    }
+
+</style>

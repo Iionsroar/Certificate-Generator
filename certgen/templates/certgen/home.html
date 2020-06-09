@@ -1,20 +1,76 @@
 {% extends 'certgen/header.html' %}
 
 {% block content %}
-<div class="row">
-    {% for t in tutorials %}
-    <div class="col s12 m6">
-      <div class="card blue-grey darken-1 hoverable">
-        <div class="card-content white-text">
-          <span class="card-title">{{t.title}}</span>
-          <p style="font-size:70%;">{{t.published}}</p>
-          <p>{{t.content|safe}}</p>
-        </div>
-        <div class="card-action">
-          <a href="#">View</a>
+{% load static %}
+<div class="columns is-6 is-variable">
+  <div class="column"></div>
+
+  <div class="column is-4">
+    <!-- certificate-template-card -->
+    <div class="card is-overlay la-relative la-card-border-3">
+      <div class="card-image">
+        <figure class="image is-3by2 la-relative">
+          <img src="" alt="Certificate">
+          <div class="la-drag-drop has-text-centered la-absolute-centered">Drop image here</div>
+        </figure>
+        <div class="has-text-weight-normal la-absolute-upperleft">
+          <span class="tag is-medium has-text-white la-is-mint">
+            Certificate Template
+          </span>
         </div>
       </div>
+
+      <div class="card-content la-card-divider">
+        <div class="content has-text-centered">
+          <a href="" class="is-size-4 la-has-text-mint">Choose Photo</a>
+          <p class="la-has-text-mint">--- or ---</p>
+          <input type="text" class="input is-size-7 la-textbox la-is-mint" placeholder="Paste image URL here">
+        </div>
+        <!-- div.content for spacing; perhaps search for other ways and exclude this from code -->
+        <div class="content"></div>
+      </div>
+
     </div>
-    {% endfor%}
+    <div class="has-text-weight-normal">
+      <span class="tag is-medium la-is-mint">
+        <a href="" class="la-has-text-white">POSITION PLACEHOLDER</a>
+      </span>
+    </div>
+  </div>
+
+
+  <div class="column is-4">
+    <!-- names-card -->
+    <div class="card is-overlay la-relative la-card-border-3">
+      <div class="card-image">
+        <figure class="image is-3by2">
+          <img src="{% static 'certgen/certificate_template_2.png' %}" alt="With Names">
+        </figure>
+        <div class="has-text-weight-normal la-absolute-upperleft">
+          <span class="tag is-medium has-text-white la-is-mint">
+            File containing Names
+          </span>
+        </div>
+      </div>
+
+      <div class="card-content la-card-divider">
+        <div class="content has-text-centered">
+          <a href="" class="is-size-4 la-has-text-mint">Choose File</a>
+          <p class="la-has-text-mint">--- or ---</p>
+          <input type="text" class="input is-size-7 la-textbox la-is-mint" placeholder="Paste names here">
+        </div>
+        <!-- div.content for spacing; perhaps search for other ways and exclude this from code -->
+        <div class="content"></div>
+      </div>
+
+    </div>
+    <div class="has-text-weight-normal is-pulled-right">
+      <span class="tag is-medium la-is-mint">
+        <a href="" class="la-has-text-white">GENERATE</a>
+      </span>
+    </div>
+
+  </div>
+  <div class="column"></div>
 </div>
 {% endblock %}

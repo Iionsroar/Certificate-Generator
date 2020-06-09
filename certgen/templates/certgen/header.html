@@ -1,26 +1,19 @@
 <!-- Compiled and minified CSS & JavaScript for BULMA -->
-<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+<!-- <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script> -->
 <head>
     {% load static %}
-    <!-- Prism CSS -->
-    <link href="{% static 'tinymce/css/prism.css' %}" rel="stylesheet">
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <!-- Compiled and minified JavaScript for Materialize CSS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <!-- Compiled and minified CSS for BULMA -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
+    {% include 'certgen/includes/styles.html' %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body>
-  {% include 'certgen/includes/navbar.html' %}
-  {% include 'certgen/includes/messaging.html' %}
-
-  <div class="box">
-   {% block content %}
-   {% endblock %}
-  </div>
+<body style="background-color: rgb(170, 202, 177);">
+    {% include 'certgen/includes/navbar-2.html' %}
+    {% include 'certgen/includes/messaging.html' %}
+    <div class="box">
+        <br>
+        {% block content %}
+        {% endblock %}
+    </div>
 </body>
 
-<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script> -->
-<script src="{% static 'tinymce/js/prism.js' %}"></script>
+{% include 'certgen/includes/scripts.html' %}

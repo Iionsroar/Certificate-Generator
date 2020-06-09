@@ -1,4 +1,4 @@
-# certificate_generator
+# Certificate Generator
 Web application for generating certificates from a list of names (file formats: .xlsx .csv .tsv .json)
 
 ## Wireframe Design

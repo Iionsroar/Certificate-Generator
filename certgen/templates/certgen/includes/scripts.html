@@ -1,5 +1,67 @@
 {% load static %}
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-<script src="{% static 'tinymce/js/prism.js' %}"></script>
+<!-- <script src="{% static 'tinymce/js/prism.js' %}"></script> -->
 <!-- M.AutoInit() used at sidebar -->
-<script>M.AutoInit();</script>
+<!-- <script>M.AutoInit();</script> -->
+<script>
+    var iconNames = ['Help', 'Settings', 'View generated'];
+
+    $(function() {
+        // Design
+        $('.navbar-end').find('.la-js-btn').find('i').hover(
+            function() {
+                if (!$('.navbar-burger').hasClass('is-active')) {
+                    $(this).removeClass('has-text-white').addClass('has-text-dark');
+                }
+            },
+            function() {
+                if (!$('.navbar-burger').hasClass('is-active')) {
+                    $(this).removeClass('has-text-dark').addClass('has-text-white');
+                }
+            });
+
+        // Incomplete:
+        $('#app-name').hover(function () {
+            $(this).children().each(function() {
+                if ($(this).hasClass('has-text-dark')) {
+                    $(this).removeClass('has-text-dark').addClass('has-text-white');
+                } else {
+                    $(this).removeClass('has-text-white').addClass('has-text-dark');
+                };
+            });
+        },
+        function () {
+            $(this).children().each(function() {
+                if ($(this).hasClass('has-text-dark')) {
+                    $(this).removeClass('has-text-dark').addClass('has-text-white');
+                } else {
+                    $(this).removeClass('has-text-white').addClass('has-text-dark');
+                };
+            });
+        });
+
+
+
+        // Navbar burger
+        $('.navbar-burger').click(function() {
+            if ($(this).hasClass('is-active')) {
+                $(this).removeClass('is-active');
+                $('#mobile').removeClass('is-active');
+                // TODO: fix problem when:
+                // hovering in full screen, then back to mobile wherein icon is white
+                // and not dark anymore
+                // IDEA: Just add an element for icon names that you will show/hide when active etc
+                $('.navbar-end').find('.icon').slice(0,3).removeClass('has-text-dark').addClass('has-text-white');
+                $('.la-mobile-names').remove();
+            } else {
+                $(this).addClass('is-active');
+                $('#mobile').addClass('is-active');
+                $('.navbar-end').find('.icon').slice(0,3).removeClass('has-text-white').addClass('has-text-dark');
+                $('.navbar-end').find('.la-js-btn').each(function(index) {
+                    $(this).append('<span class="is-size-6 has-text-dark la-mobile-names">' + iconNames[index] + '</span>')
+                });
+            }
+        });
+
+    });
+</script>

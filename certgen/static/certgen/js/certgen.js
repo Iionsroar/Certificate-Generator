@@ -3,31 +3,33 @@ $(function() {
     $('.navbar-end').find('.la-js-btn').hover(
         function() {
             if ($(window).width() > 1006) {
-                $(this).removeClass('has-text-white').addClass('has-text-dark');
+                $(this).toggleClass('has-text-white has-text-dark');
             }
         },
         function() {
             if ($(window).width() > 1006) {
-                $(this).removeClass('has-text-dark').addClass('has-text-white');
+                $(this).toggleClass('has-text-white has-text-dark');
             }
         });
 
 
     $('#app-name').hover(function () {
+        $('#app-name').toggleClass('is-italic');
         $(this).children().each(function() {
             if ($(this).hasClass('has-text-dark')) {
-                $(this).removeClass('has-text-dark').addClass('has-text-white');
+                $(this).toggleClass('has-text-white has-text-dark');
             } else {
-                $(this).removeClass('has-text-white').addClass('has-text-dark');
+                $(this).toggleClass('has-text-white has-text-dark');
             };
         });
     },
     function () {
+        $('#app-name').toggleClass('is-italic');
         $(this).children().each(function() {
             if ($(this).hasClass('has-text-dark')) {
-                $(this).removeClass('has-text-dark').addClass('has-text-white');
+                $(this).toggleClass('has-text-white has-text-dark');
             } else {
-                $(this).removeClass('has-text-white').addClass('has-text-dark');
+                $(this).toggleClass('has-text-white has-text-dark');
             };
         });
     });

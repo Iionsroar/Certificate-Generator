@@ -1,12 +1,24 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from .models import Tutorial, TutorialSeries, TutorialCategory
 from .forms import NewUserForm
+import json
 
 # Create your views here.
+# orders function for ajax practice
+def orders(request):
+  with open(r"C:\Users\lito altoveros\Desktop\certificate_generator\certgen\static\certgen\json\orders.json") as jsonFile:
+      data = json.loads("".join(jsonFile.readlines()))
+      return JsonResponse(data, safe=False)
+
+def practice(request):
+    return render(request,
+                'certgen/practice.html',
+                {})
+
 def single_slug(request, single_slug):
     categories = [c.category_slug for c in TutorialCategory.objects.all()]
     if single_slug in categories:

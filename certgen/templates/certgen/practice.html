@@ -84,6 +84,10 @@
             <p class="is-size-6">meal: <input type="text" id="meal"></p>
             <button class="button is-dark" id="add-order">Add!</button>
 
+            <br><br><br><br><br>
+            <div id="drop-zone" class="has-text-centered" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
+                Drop item here.
+            </div>
         </div>
     </div>
 {% endblock %}

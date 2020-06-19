@@ -68,3 +68,8 @@ div.la-drag-drop {
 .la-js-navlabel {
     display: none;
 }
+
+/*bulma override*/
+img, image {
+    border-width: 0 !important;
+}

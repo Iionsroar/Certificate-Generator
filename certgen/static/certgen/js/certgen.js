@@ -1,67 +1,27 @@
-$(function() {
-    // navbar-brand design
-    $('.navbar-end').find('.la-js-btn').hover(
-        function() {
-            if ($(window).width() > 1006) {
-                $(this).toggleClass('has-text-white has-text-dark');
+// drop zone
+function dropHandler(ev) {
+    // maybe youll do a different function for handling file drops
+    ev.preventDefault();
+
+    let file;
+    if (ev.dataTransfer.items) {
+        let dropItem = ev.dataTransfer.items[0];
+        if (dropItem.kind === 'file') {
+            file = dropItem.getAsFile();
+            let $dropPreview = $('img.drop');
+            $dropPreview.attr('src', URL.createObjectURL(file));
+            if (! $dropPreview.is(':visible')) {
+                $('.drop').toggle();
+                $('.delete').toggle(); // edit to differentiate bet two cards
             }
-        },
-        function() {
-            if ($(window).width() > 1006) {
-                $(this).toggleClass('has-text-white has-text-dark');
-            }
-        });
-
-
-    $('#app-name').hover(function () {
-        $('#app-name').toggleClass('is-italic');
-        $(this).children().each(function() {
-            if ($(this).hasClass('has-text-dark')) {
-                $(this).toggleClass('has-text-white has-text-dark');
-            } else {
-                $(this).toggleClass('has-text-white has-text-dark');
-            };
-        });
-    },
-    function () {
-        $('#app-name').toggleClass('is-italic');
-        $(this).children().each(function() {
-            if ($(this).hasClass('has-text-dark')) {
-                $(this).toggleClass('has-text-white has-text-dark');
-            } else {
-                $(this).toggleClass('has-text-white has-text-dark');
-            };
-        });
-    });
-
-
-    // navbar burger
-    $('.navbar-burger').click(function() {
-        if ($(this).hasClass('is-active')) {
-            $(this).removeClass('is-active');
-            $('#mobile').removeClass('is-active');
-            $('.navbar-end').find('.la-js-btn').removeClass('has-text-dark').addClass('has-text-white');
-            $('.la-js-navlabel').hide();
         } else {
-            $(this).addClass('is-active');
-            $('#mobile').addClass('is-active');
-            $('.navbar-end').find('.la-js-btn').removeClass('has-text-white').addClass('has-text-dark');
-            $('.la-js-navlabel').show();
+            dropItem = ev.dataTransfer.files[0];
+            file = dropItem; // not sure if this works
         }
-    });
-    $(window).resize(function () {
-        if ($(this).width() > 1006) {
-            $('.navbar-end').find('.la-js-btn').removeClass('has-text-dark').addClass('has-text-white');
-            $('.la-js-navlabel').hide();
-        } else {
-            $('.navbar-end').find('.la-js-btn').removeClass('has-text-white').addClass('has-text-dark');
-            $('.la-js-navlabel').show();
-        }
-    });
+    }
 
-    // image modal
-    $('.la-js-image-modal').click(function () {
-        $(this).find('.modal').toggleClass('is-active');
-        $('html').toggleClass('is-clipped');
-    });
-});
+};
+
+function dragOverHandler(ev) {
+  ev.preventDefault();
+};

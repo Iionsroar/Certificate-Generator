@@ -1,7 +1,11 @@
-{% extends 'certgen/header.html' %}
+{% extends 'certgen/layout.html' %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'certgen/css/practice.css' %}">
+{% endblock %}
 
 {% block content %}
-{% load static %}
     <div class="tabs is-centered is-medium is-boxed">
         <ul>
             <li rel="la-zeus">
@@ -10,13 +14,13 @@
                     <span>Cabin Zeus</span>
                 </a>
             </li>
-            <li class="is-active" rel="la-poseidon">
+            <li rel="la-poseidon">
                 <a>
                     <span class="icon is-small"><i class="fa fa-tint"></i></span>
                     <span>Cabin Poseidon</span>
                 </a>
             </li>
-            <li rel="la-hades">
+            <li class="is-active"  rel="la-hades">
                 <a>
                     <span class="icon is-small"><i class="fa fa-cloud"></i></span>
                     <span>Cabin Hades</span>
@@ -86,8 +90,15 @@
 
             <br><br><br><br><br>
             <div id="drop-zone" class="has-text-centered" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
-                Drop item here.
+                <p class='dropImg la-active'>Drop item here.</p>
+                <img class='dropImg' src="" alt="preview">
             </div>
+            <br>
+            <button class="button is-dark is-outlined la-upload">Upload</button>
         </div>
     </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'certgen/js/practice.js' %}"></script>
 {% endblock %}

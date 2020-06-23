@@ -1,0 +1,7 @@
+/* ========= hovering navbar icons =============*/
+.navbar-item:hover {
+    background-color: rgb(170, 202, 177);
+}
+.la-js-navlabel {
+    display: none;
+}

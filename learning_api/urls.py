@@ -6,7 +6,7 @@ app_name = 'learning_api'
 
 router = routers.DefaultRouter()
 router.register('orders', views.OrderView)
-router.register('accounts', views.AccountView)
+router.register('certificates', views.CertificateView)
 
 urlpatterns = [
     path('', include(router.urls)),

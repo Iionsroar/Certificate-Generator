@@ -1,14 +1,13 @@
-<!-- Compiled and minified CSS & JavaScript for BULMA -->
-<!-- <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script> -->
 <head>
     {% load static %}
     {% include 'certgen/includes/styles.html' %}
+    {% block styles %}
+    {% endblock %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body style="background-color: rgb(170, 202, 177);">
     {% include 'certgen/includes/navbar.html' %}
-    {% include 'certgen/includes/messaging.html' %}
     <div class="box">
         <br>
         {% block content %}
@@ -17,3 +16,5 @@
 </body>
 
 {% include 'certgen/includes/scripts.html' %}
+{% block scripts %}
+{% endblock %}

@@ -6,6 +6,11 @@ div.la-absolute-upperleft {
     top: 0;
     left: 0;
 }
+div.la-absolute-upperright {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+}
 div.la-absolute-centered {
     position: absolute;
     top: 35%;
@@ -61,15 +66,15 @@ div.la-drag-drop {
 .la-has-text-white:hover {
     color: black;
 }
-/* ========= hovering navbar icons =============*/
-.navbar-item:hover {
-    background-color: rgb(170, 202, 177);
-}
-.la-js-navlabel {
+
+
+/* ========= file drop zone ========= */
+img.drop, .tag, .delete {
+    /* .tag is hidden so js hover function can work accordingly */
+    /* .delete will appear once image is uploaded */
     display: none;
 }
 
-/*bulma override*/
-img, image {
-    border-width: 0 !important;
+.la-active {
+    display: block;
 }

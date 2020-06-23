@@ -1,29 +1,41 @@
-{% extends 'certgen/header.html' %}
+{% extends 'certgen/layout.html' %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'certgen/css/certgen.css' %}">
+{% endblock %}
 
 {% block content %}
-{% load static %}
 <div class="columns is-9 is-variable">
   <div class="column"></div>
 
   <div class="column is-4">
     <!-- certificate-template-card -->
     <div class="card is-overlay la-relative la-card-border-3">
-      <div class="card-image">
+      <div class="card-image drop-zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);">
         <figure class="image is-3by2">
-          <img src="" alt="Certificate">
+          <img class="drop" src="" alt="Certificate">
           <!-- for mobile, the element below will simply be a button same as the 'choose photo' functionality -->
           <!-- for browsers, the element is unselectable? or whatever it is called -->
-          <div class="la-drag-drop has-text-centered la-absolute-centered">Drop image here</div>
+          <a class="drop la-active" href="">
+            <div class="la-drag-drop has-text-centered la-absolute-centered">
+              Drop image here
+            </div>
+          </a>
         </figure>
         <div class="has-text-weight-normal la-absolute-upperleft">
           <span class="tag is-medium has-text-white la-is-mint">
             Certificate Template
           </span>
         </div>
+        <div class="la-absolute-upperright">
+          <button class="delete is-medium"></button>
+        </div>
       </div>
 
       <div class="card-content la-card-divider">
         <div class="content has-text-centered">
+          <!-- study and implement: https://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_input_type_file -->
           <a href="" class="is-size-4 la-has-text-mint">Choose Photo</a>
           <p class="la-has-text-mint">--- or ---</p>
           <input type="text" class="input is-size-7 la-textbox la-is-mint" placeholder="Paste image URL here">
@@ -47,14 +59,14 @@
       <div class="card-image">
         <figure class="image is-3by2">
           <a class="la-js-image-modal">
-            <img src="{% static 'certgen/certificate_template_2.png' %}" alt="With Name">
+            <img src="{% static 'certgen/img/certificate_template_2.png' %}" alt="With Name">
             <!-- image modal -->
             <!-- TODO: Add modal to the first card -->
             <div class="modal">
               <div class="modal-background la-modal-close"></div>
               <div class="modal-content">
                 <p class="image is-4by3">
-                  <img src="{% static 'certgen/certificate_template_2.png' %}" alt="With Name">
+                  <img src="{% static 'certgen/img/certificate_template_2.png' %}" alt="With Name">
                 </p>
               </div>
               <button class="modal-close is-large la-modal-close" aria-label="close"></button>
@@ -89,4 +101,8 @@
 
   <div class="column"></div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'certgen/js/certgen.js' %}"></script>
 {% endblock %}

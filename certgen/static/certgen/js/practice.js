@@ -1,6 +1,7 @@
 $(function () {
 
-
+    let defaultPanel = $('.tabs ul li.is-active').attr('rel');
+    $('.' + defaultPanel).addClass('la-active');
     $('.tabs ul li').click(function () {
         var panelToShow = $(this).attr('rel');
         // alert(panelToShow);
@@ -182,35 +183,64 @@ $(function () {
     })
 
 
+    // $('#drop-zone').dropzone({url: 'https://httpbin.org/post'});
 
 })
 
-function dropHandler(ev) {
-  console.log('File(s) dropped');
 
-  // Prevent default behavior (Prevent file from being opened)
+let names = "janus, eurytion, geryon, briares";
+// LEANING FILE APIs
+// https://developer.mozilla.org/en-US/docs/Web/API/File
+// https://developer.mozilla.org/en-US/docs/Web/API/FileReader
+// https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications
+function dropHandler(ev) {
+  // reference: https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/File_drag_and_drop
+  console.log('File(s) dropped');
   ev.preventDefault();
 
   if (ev.dataTransfer.items) {
-    // Use DataTransferItemList interface to access the file(s)
-    for (var i = 0; i < ev.dataTransfer.items.length; i++) {
-      // If dropped items aren't files, reject them
-      if (ev.dataTransfer.items[i].kind === 'file') {
-        var file = ev.dataTransfer.items[i].getAsFile();
-        console.log('... file[' + i + '].name = ' + file.name);
-      }
+    dropItem = ev.dataTransfer.items[0];
+
+    if (dropItem.kind === 'file') {
+      var file = dropItem.getAsFile();
+      console.log('... file[' + 0 + '].name = ' + file.name);
+      let $dropPreview = $('img.dropImg')
+      // ajax
+      // $(function () {
+      //   let certificate_details = {
+      //     certificate_name: file.name,
+      //     // template_img: file, // wonder if thisll work
+      //     template_url: 'http://127.0.0.1:8000/user_uploads/certificate_templates/certificate_template_2.png',
+      //     names_csv: names
+      //   };
+
+      //   let $dropPreview = $('img.dropImg')
+      //   $.ajax({
+      //     type: 'POST',
+      //     url: '/learning_api/certificates/',
+      //     data: certificate_details,
+      //     success: function () {
+      //       alert('success');
+      //       // TODO & TO TEST
+      //       // display image on div box
+      //          $dropPreview.attr('src', URL.createObjectURL(file)); // reference: https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications#Example_Using_object_URLs_to_display_images
+      //          $('.dropImg').toggle();
+      //     },
+      //     error: function () {
+      //       alert('error loading image');
+      //     }
+      //   });
+      // });
+
     }
   } else {
-    // Use DataTransfer interface to access the file(s)
-    for (var i = 0; i < ev.dataTransfer.files.length; i++) {
-      console.log('... file[' + i + '].name = ' + ev.dataTransfer.files[i].name);
-    }
+    dropItem = ev.dataTransfer.files[0];
+    console.log('... file[' + 0 + '].name = ' + dropItem.name);
   }
 };
 
 function dragOverHandler(ev) {
-  console.log('File(s) in drop zone');
+  console.log('File in drop zone');
 
-  // Prevent default behavior (Prevent file from being opened)
   ev.preventDefault();
 };

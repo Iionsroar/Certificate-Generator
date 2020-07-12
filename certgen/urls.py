@@ -5,6 +5,5 @@ app_name = 'certgen'
 
 urlpatterns = [
     path("", views.homepage, name='homepage'),
-    path("practice/", views.practice, name='practice'),
     path("user_uploads/certificate_templates/<image_slug>", views.image_slug, name='image_slug'),
 ]

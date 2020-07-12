@@ -1,73 +1,45 @@
-div.la-relative {
-    position: relative;
-}
-div.la-absolute-upperleft {
+div.upperleft {
     position: absolute;
     top: 0;
     left: 0;
 }
-div.la-absolute-upperright {
+div.upperright {
     position: absolute;
     top: 6px;
     right: 6px;
 }
-div.la-absolute-centered {
+div.center {
     position: absolute;
     top: 35%;
     left: 20%;
     right: 20%;
 }
-div.la-card-border-3 {
+.card.bordered {
     border-style: solid;
     border-width: 3px;
-    border-color: rgb(170, 202, 177);
 }
-.la-card-divider {
+.card-content {
+    padding-bottom: 50px;
+}
+.top-bordered {
     border-top-width: 1px;
     border-top-style: solid;
-    border-color: rgb(170, 202, 177);
-}
-.la-has-text-mint {
-    color: rgb(170, 202, 177);
-}
-/*=============== colored textbox ===============*/
-input.la-textbox {
-    color: white;
-    width: 75%;
-    text-align: center;
-    outline-style: none;
-    outline-color: black;
-}
-input.la-textbox::placeholder {
-    color: white;
-}
-input.la-textbox:focus {
-    border-color: rgb(170, 202, 177);
-    box-shadow: none;
 }
 /*===============================================*/
-div.la-drag-drop {
-    border: dashed 3px rgb(170, 202, 177);
+input[type=text] {
+    width: 75%;
+    text-align: center;
+}
+/*===============================================*/
+div.dropbox {
+    border: dashed 3px;
     border-radius: 5px;
     padding: 5%;
-    color: rgb(170, 202, 177);
 }
-.la-is-mint {
-    background-color: rgb(170, 202, 177) !important;
-    /* used !important since bulma's tag class overrides this style */
-}
-.tag.la-is-mint {
-    border-radius: 0;
+.sharp-border {
+    border-radius: 0 !important;
 }
 /* =============================================*/
-.la-has-text-white {
-    color: white;
-}
-.la-has-text-white:hover {
-    color: black;
-}
-
-
 /* ========= file drop zone ========= */
 img.drop, .tag, .delete {
     /* .tag is hidden so js hover function can work accordingly */
@@ -77,4 +49,15 @@ img.drop, .tag, .delete {
 
 .la-active {
     display: block;
+}
+
+/* ========= custom file upload ========= */
+/* https://stackoverflow.com/questions/5813344/how-to-customize-input-type-file */
+#upload-template, #upload-namesfile {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}
+label.upload-template {
+    cursor: pointer;
 }

@@ -1,0 +1,62 @@
+:root {
+    --green: #aacab1;
+    --black: #363636;
+    --white: #fff;
+}
+
+html {
+    background-color: var(--green);
+}
+
+.navbar {
+    background-color: var(--green);
+}
+
+/* ========= hovering navbar icons =============*/
+.navbar-item:hover {
+    background-color: var(--green);
+}
+
+/* = = = = = = = = = = = = = = = = = = = = = = = =  */
+.is-mint {
+    background-color: var(--green) !important;
+    color: var(--white) !important;
+}
+a span.is-mint:hover {
+    color: var(--black) !important;
+}
+
+
+.has-text-mint {
+    color: var(--green);
+}
+label.has-text-mint:hover {
+    color: var(--black);
+}
+
+
+input[type=text]::placeholder {
+    color: var(--white);
+}
+input[type=text]:hover {
+    border-color: var(--green);
+    box-shadow: none;
+}
+input[type=text]:focus {
+    border-color: var(--black);
+    box-shadow: none;
+}
+
+
+div.dropbox {
+    color: var(--green);
+    border-color: var(--green);
+}
+
+.top-bordered {
+    border-color: var(--green);
+}
+
+.card.bordered {
+    border-color: var(--green);
+}

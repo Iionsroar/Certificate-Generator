@@ -1,20 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     {% load static %}
     {% include 'certgen/includes/styles.html' %}
-    {% block styles %}
-    {% endblock %}
+    {% block styles %}{% endblock %}
+    <title>Certificate Generator</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body style="background-color: rgb(170, 202, 177);">
+<body>
     {% include 'certgen/includes/navbar.html' %}
     <div class="box">
         <br>
-        {% block content %}
-        {% endblock %}
+        {% block content %}{% endblock %}
     </div>
+    {% include 'certgen/includes/scripts.html' %}
 </body>
+{% block scripts %}{% endblock %}
 
-{% include 'certgen/includes/scripts.html' %}
-{% block scripts %}
-{% endblock %}
+</html>
+
+

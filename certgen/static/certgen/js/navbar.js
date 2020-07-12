@@ -58,17 +58,4 @@ $(function() {
             $('.la-js-navlabel').show();
         }
     });
-
-    // image modal
-    $('.la-js-image-modal').click(function () {
-        $(this).find('.modal').toggleClass('is-active');
-        $('html').toggleClass('is-clipped');
-    });
-
-    $('.drop-zone').hover(function () {
-        if ($('img.drop').is(':visible')) {
-            $(this).find('.tag').fadeToggle(100);
-        };
-    });
-
 })

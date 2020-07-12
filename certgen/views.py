@@ -1,9 +1,8 @@
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.conf import settings
 from .models import Certificate
 from PIL import Image
-import json
 import os
 
 USER_UPLOADS_DIR = settings.MEDIA_ROOT
@@ -16,16 +15,10 @@ def image_slug(request, image_slug):
   except IOError:
     return HttpResponse('image not found')
 
-
-def practice(request):
-    return render(request,
-                'certgen/practice.html',
-                {})
-
-
 def homepage(request):
     return render(request,
                   'certgen/home.html',
                   {})
+
 
 

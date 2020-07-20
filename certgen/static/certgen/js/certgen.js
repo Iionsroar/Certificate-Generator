@@ -25,15 +25,17 @@ function pushName(name) {
     let nameObj = {"name": name};
     let dropdown_template = $('#dropdown-item-template').html();
     names.push(nameObj['name']);
+
     $('#dropdown-name-items').append(Mustache.render(dropdown_template, nameObj));
+    let val = Number($('#names-counter').val());
+    $('#names-counter').val(val + 1).trigger('change');
 }
 
 function addNames(file) {
-    // TODO: render a preview thumbnail using the first name in the file as sample
+    // TODO: render a preview thumbnail using the first name in the file that is just sent as sample, then change img src
     // sheetjs
     if (! file.type) { // if argument is an array instead
         $.each(file, function(i, f) {
-            // names.push(file[i]);
             pushName(file[i]);
         });
     } else {
@@ -123,7 +125,7 @@ $(function() {
 
     // =   =   =   =   =   =   =   =   =    =   =   =
     // removing uploaded files
-    $('.remove-file').click(function() {
+    $('.card').delegate('.remove-content', 'click',  function() {
         if ($(this).attr('data-type-to-remove') == 'img') {
             let $card_image = $('#' + $(this).attr('data-card-img-id'));
             let $img = $card_image.find('img.drop');
@@ -133,15 +135,27 @@ $(function() {
             $card_image.find('.tag').show();
             $card_image.find('div.drop').toggle();
 
-            let $card_tag = $(this).parent().prev().find('span')
-            $(this).closest('.card').removeClass('border-is-dark').addClass('border-is-mint');
-            $card_tag.removeClass('is-dark').addClass('is-mint'); // change tag color
+            switchContentState($(this));
 
-        } else {
-            // TODO
+        } else if ($(this).attr('data-type-to-remove') == 'name') {
+            let $item = $(this).closest('.dropdown-item')
+
+            let name_index = $item.index(); // SEVERETODO
+            names.splice(name_index, 1);
+
+            let val = Number($('#names-counter').val());
+            $('#names-counter').val(val - 1).trigger('change');
+
+            $item.remove();
         }
     });
 
+    function switchContentState(object) {
+        let $card = object.closest('.card');
+        $card.toggleClass('border-is-dark border-is-mint')
+        $card.find('span.lbl').toggleClass('is-dark is-mint');
+        $card.find('.dropdown').toggle();
+    }
 
     // removing upperleft tags when hovering over preview thumbnails
     $('.drop-zone').hover(function () {
@@ -160,11 +174,7 @@ $(function() {
     let $link_template = $('#paste-template');
 
     $img_template.load(function() {
-        if ($(this).attr('src')) {
-            let $card_tag = $(this).parent().next().find('span')
-            $(this).closest('.card').removeClass('border-is-mint').addClass('border-is-dark');
-            $card_tag.removeClass('is-mint').addClass('is-dark'); // change tag color
-        };
+        if ($(this).attr('src')) switchContentState($(this));
     });
 
     // TODO: change selector to variable
@@ -173,7 +183,7 @@ $(function() {
 
         let $card_image = $('#' + $(this).attr('data-card-img-id'));
         $(this).hide();
-        $card_image.find('.remove-file').hide();
+        $card_image.find('.remove-content').hide();
         $card_image.find('.tag').show();
         $card_image.find('div.drop').show();
     });
@@ -226,7 +236,15 @@ $(function() {
         }, 1000);
 
         // TODO: a way to delete inputted names
-        console.log(names);
-    })
+    });
 
+    // dropdown names
+    $('.card').delegate('#names-counter', 'change', function() {
+        let $card = $(this).closest('.card');
+        if ($card.hasClass('border-is-mint') && Number($(this).val())) {
+            switchContentState($(this));
+        } else if ($card.hasClass('border-is-dark') && ! Number($(this).val())) {
+            switchContentState($(this));
+        }
+    });
 });

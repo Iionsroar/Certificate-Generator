@@ -64,8 +64,8 @@ div.dropbox {
 .la-active {
     display: block;
 }
-/* =============== file drop zone ============== */
-img.drop, .tag, .delete {
+/* =============================================*/
+img.drop, .tag, .delete, .dropdown, #names-counter {
     /* .tag is hidden so js hover function can work accordingly */
     /* .delete will appear once image is uploaded */
     display: none;
@@ -83,5 +83,13 @@ img.drop, .tag, .delete {
 }
 label.upload-template, label.upload-namesfile {
     cursor: pointer;
+}
+/* =============================================*/
+.dropdown-menu {
+    min-width: 18em;
+}
+.dropdown-item {
+    padding-top: 3px;
+    padding-bottom: 0px;
 }
 

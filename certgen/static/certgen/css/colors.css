@@ -11,6 +11,14 @@ input.is-dark {
 span.is-dark, input.is-dark::placeholder {
     color: var(--green) !important;
 }
+div.is-dark {
+    background-color: var(--black) !important;
+    color: var(--green) !important;
+}
+.dropdown-item.is-dark:hover {
+    background-color: var(--green) !important;
+    color: var(--black) !important;
+}
 .is-mint {
     background-color: var(--green) !important;
     color: var(--white) !important;
@@ -66,8 +74,7 @@ input[type=text]:focus {
     outline-style:
 }*/
 
-
-div.is-mint {
+div.dropbox.is-mint {
     color: var(--green) !important;
     background-color: var(--white) !important;
     border-color: var(--green) !important;
@@ -79,4 +86,3 @@ div.is-mint {
 .border-is-dark {
     border-color: var(--black);
 }
-

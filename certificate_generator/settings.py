@@ -67,7 +67,6 @@ INSTALLED_APPS = [
     'certgen.apps.CertgenConfig',
     'tinymce',
     'rest_framework',
-    'learning_api',
 ]
 
 MIDDLEWARE = [
@@ -148,7 +147,4 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'certgen', 'user_uploads')
-
 STATIC_URL = '/static/'
-MEDIA_URL = '/user_uploads/'

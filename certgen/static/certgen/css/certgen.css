@@ -8,49 +8,72 @@ div.upperright {
     top: 6px;
     right: 6px;
 }
+#dropdown-names.upperright {
+    top: 0px;
+    right: 0px;
+}
 div.center {
     position: absolute;
     top: 35%;
     left: 20%;
     right: 20%;
 }
-.card.bordered {
+.card {
     border-style: solid;
     border-width: 3px;
 }
 .card-content {
     padding-bottom: 50px;
 }
-.top-bordered {
+.top-border-is-1 {
     border-top-width: 1px;
     border-top-style: solid;
 }
 /*===============================================*/
 input[type=text] {
-    width: 75%;
+    width: 100%;
     text-align: center;
 }
+input[type=text]:hover {
+    border-width: 3px;
+}
 /*===============================================*/
+div.drop {
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+}
 div.dropbox {
     border: dashed 3px;
     border-radius: 5px;
     padding: 5%;
 }
+/* =============================================*/
+.paste-content {
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+.card-content input {
+    width: 320px;
+}
 .sharp-border {
     border-radius: 0 !important;
 }
-/* =============================================*/
-/* ========= file drop zone ========= */
+.la-active {
+    display: block;
+}
+/* =============== file drop zone ============== */
 img.drop, .tag, .delete {
     /* .tag is hidden so js hover function can work accordingly */
     /* .delete will appear once image is uploaded */
     display: none;
 }
-
-.la-active {
-    display: block;
+#dropdown-name-items .delete {
+    display: inline;
+    padding-right: 5px;
 }
-
 /* ========= custom file upload ========= */
 /* https://stackoverflow.com/questions/5813344/how-to-customize-input-type-file */
 #upload-template, #upload-namesfile {
@@ -58,6 +81,7 @@ img.drop, .tag, .delete {
     position: absolute;
     z-index: -1;
 }
-label.upload-template {
+label.upload-template, label.upload-namesfile {
     cursor: pointer;
 }
+

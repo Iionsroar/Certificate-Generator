@@ -20,5 +20,4 @@ urlpatterns = [
     path("", include('certgen.urls')),
     path('admin/', admin.site.urls),
     path('tinymce/', include('tinymce.urls')),
-    path('learning_api/', include('learning_api.urls')),
 ]

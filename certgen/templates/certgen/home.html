@@ -80,9 +80,10 @@
       <!-- = = = = = = = = = IMAGE SECTION = = = = = = = = = = = = -->
         <figure class="image is-3by2">
           <img data-modal-id="certificate-modal" data-card-img-id="certificate-thumb" class="drop" src="" alt="Certificate">
+          <canvas id="certificate-preview" class="border-is-dark border-is-3" width="480" height="320"><p>none</p></canvas>
           <div class="drop la-active" href="">
             <div class="dropbox is-mint center has-text-centered">
-              Drop file here
+              Drop file/s here
               <!-- TODO: toast when file is successfully uploaded or dropped -->
             </div>
           </div>
@@ -101,7 +102,7 @@
           <div class="dropdown-trigger">
             <a>
               <span class="tag is-medium is-dark is-mint-hover sharp-border" aria-haspopup="true" aria-controls="dropdown-menu4">
-                <span>The Names</span>
+                <span>Uploaded Names</span>
                 <span class="icon is-small">
                   <i class="fas fa-angle-down" aria-hidden="true"></i>
                 </span>
@@ -117,16 +118,14 @@
           </template>
           {% endverbatim %}
           <div class="dropdown-menu is-dark" role="menu">
-            <div id="dropdown-name-items" class="dropdown-content is-dark">
-            </div>
+            <div id="dropdown-name-items" class="dropdown-content is-dark"></div>
           </div>
         </div>
-
       </div>
       <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
       <div class="card-content top-border-is-1 border-is-mint">
         <div class="content has-text-centered">
-          <label for="upload-namesfile" class="is-size-4 has-text-dark upload-template">Choose Spreadsheet File</label>
+          <label for="upload-namesfile" class="is-size-4 has-text-dark upload-template">Choose Spreadsheet File/s</label>
           <input type="file" name="namesfile" id="upload-namesfile" accept=".xlsx, .json, .csv" multiple>
 
           <p class="has-text-dark">--- or ---</p>
@@ -144,7 +143,7 @@
 
     </div>
     <div class="has-text-weight-normal is-pulled-right">
-        <a><span class="tag is-medium is-dark is-mint-hover sharp-border">
+        <a id="generate"><span class="tag is-medium is-dark is-mint-hover sharp-border">
             GENERATE
             <!-- TODO: button will only appear when both template and names are provided -->
         </span></a>
@@ -152,12 +151,16 @@
   <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
   </div>
 
-  <div class="column"></div>
+  <div class="column">
+<!--     <canvas id="certificate-preview" class="border-is-dark border-is-3" width="480" height="320"><p>none</p></canvas> -->
+  </div>
 </div>
 {% endblock %}
 
 {% block scripts %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.3/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.3/xlsx.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.3/jszip.min.js"></script> -->
+<script src="{% static 'certgen/js/jszip.min.js' %}"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.3/xlsx.js"></script> -->
+<script src="{% static 'certgen/js/xlsx.js' %}"></script>
 <script src="{% static 'certgen/js/certgen.js' %}"></script>
 {% endblock %}

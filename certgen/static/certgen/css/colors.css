@@ -53,6 +53,9 @@ label.has-text-mint:hover {
 label.has-text-dark:hover {
     color: var(--green) !important;
 }
+.navbar .icon.has-text-white:hover {
+    color: var(--black) !important;
+}
 
 
 input[type=text]::placeholder {

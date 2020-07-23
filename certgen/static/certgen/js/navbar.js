@@ -1,16 +1,17 @@
 $(function() {
     // navbar-brand design
-    $('.navbar-end').find('.la-js-btn').hover(
-        function() {
-            if ($(window).width() > 1006) {
-                $(this).toggleClass('has-text-white has-text-dark');
-            }
-        },
-        function() {
-            if ($(window).width() > 1006) {
-                $(this).toggleClass('has-text-white has-text-dark');
-            }
-        });
+    // TRYING SMTH 072120, IT WORKED! DELEATER
+    // $('.navbar-end').find('.la-js-btn').hover(
+    //     function() {
+    //         if ($(window).width() > 1006) {
+    //             $(this).toggleClass('has-text-white has-text-dark');
+    //         }
+    //     },
+    //     function() {
+    //         if ($(window).width() > 1006) {
+    //             $(this).toggleClass('has-text-white has-text-dark');
+    //         }
+    //     });
 
 
     $('#app-name').hover(function () {
@@ -33,7 +34,6 @@ $(function() {
             };
         });
     });
-
 
     // navbar burger
     $('.navbar-burger').click(function() {

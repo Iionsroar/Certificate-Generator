@@ -8,19 +8,38 @@ window.addEventListener('drop', function(e) {
     e.preventDefault();
 }, false);
 
+function generatePreview(name, font="serif") {
+    let ctx = $('#certificate-preview')[0].getContext('2d');
+    let template = new Image();
+    template.src = $('#template-thumb img').attr('src');
+
+    ctx.clearRect(0, 0, 480, 320);
+    ctx.drawImage(template, 0, 0, 480, 320);
+
+    ctx.font = 'bold 18px Merriweather';
+    ctx.textAlign = 'center';
+    ctx.fillText(name, 240, 200);
+
+    // TODO: manage previewing certificate in second card
+    // $('canvas').show();
+    $('#certificate-thumb img').attr('src', $('canvas')[0].toDataURL('image/png', 1)).show();
+    $('#certificate-thumb .dropbox').hide();
+
+};
+
 function addImg(imgObj, src) {
     let $imgObj = imgObj;
     let $card_image = $('#'+$imgObj.attr('data-card-img-id'));
     $imgObj.attr('src', src);
     if (! $imgObj.is(':visible')) {
-        $imgObj.css('cursor', 'pointer');
-        $card_image.find('.tag').hide();
+        $card_image.find('.tag').hide().delay(250).fadeIn();
         $card_image.find('.drop, .delete').toggle();
     }
 }
 
-let names = [];
 
+let names = [];
+let preview_name;
 function pushName(name) {
     let nameObj = {"name": name};
     let dropdown_template = $('#dropdown-item-template').html();
@@ -34,7 +53,8 @@ function pushName(name) {
 function addNames(file) {
     // TODO: render a preview thumbnail using the first name in the file that is just sent as sample, then change img src
     // sheetjs
-    if (! file.type) { // if argument is an array instead
+    if (! file.type) { // if argument is an array
+        preview_name = file[0];
         $.each(file, function(i, f) {
             pushName(file[i]);
         });
@@ -46,6 +66,7 @@ function addNames(file) {
             let name;
             if (file.type.endsWith('ms-excel')) {
                 // csv files
+                // TODO: get first name in file and store to the var preview_name
                 for (const [key, value] of Object.entries(workbook.Sheets.Sheet1)) {
                     if (value['w']) {
                         pushName(value['w'])
@@ -62,6 +83,7 @@ function addNames(file) {
         }
         reader.readAsArrayBuffer(file);
     };
+    generatePreview(preview_name);
 };
 
 
@@ -72,7 +94,7 @@ function dropHandler(ev, target) {
 
     let file;
     if (target.id == 'certificate-thumb') {
-        // if dragged on file dropzone
+        // if dropped on names file dropzone
         if (ev.dataTransfer.items) {
             let dropItems = ev.dataTransfer.items;
             for (var i =  dropItems.length - 1; i >= 0; i--) {
@@ -87,7 +109,7 @@ function dropHandler(ev, target) {
         };
 
     } else {
-        // if dragged on template dropzone
+        // if dropped on template dropzone
         if (ev.dataTransfer.items) {
             let dropItem = ev.dataTransfer.items[0];
             if (dropItem.kind === 'file') {
@@ -124,6 +146,15 @@ $(function() {
     });
 
     // =   =   =   =   =   =   =   =   =    =   =   =
+    // toggle border color to indicate if content is uploaded
+    function switchContentState(object) {
+        let $card = object.closest('.card');
+        let $card_content = $card.find('.card-content');
+        $card.toggleClass('border-is-dark border-is-mint')
+        $card_content.toggleClass('border-is-dark border-is-mint')
+        $card.find('span.lbl').toggleClass('is-dark is-mint');
+        $card.find('.dropdown').toggle();
+    }
     // removing uploaded files
     $('.card').delegate('.remove-content', 'click',  function() {
         if ($(this).attr('data-type-to-remove') == 'img') {
@@ -140,7 +171,7 @@ $(function() {
         } else if ($(this).attr('data-type-to-remove') == 'name') {
             let $item = $(this).closest('.dropdown-item')
 
-            let name_index = $item.index(); // SEVERETODO
+            let name_index = $item.index();
             names.splice(name_index, 1);
 
             let val = Number($('#names-counter').val());
@@ -149,45 +180,51 @@ $(function() {
             $item.remove();
         }
     });
-
-    function switchContentState(object) {
-        let $card = object.closest('.card');
-        $card.toggleClass('border-is-dark border-is-mint')
-        $card.find('span.lbl').toggleClass('is-dark is-mint');
-        $card.find('.dropdown').toggle();
-    }
-
     // removing upperleft tags when hovering over preview thumbnails
     $('.drop-zone').hover(function () {
         if ($(this).find('img.drop').is(':visible') ) {
-            $(this).find('.tag').fadeOut(100);
+            $(this).find('.tag.lbl').fadeOut(100);
         };
     }, function () {
         if ($(this).find('img.drop').is(':visible') ) {
-            $(this).find('.tag').fadeIn(100);
+            $(this).find('.tag.lbl').fadeIn(100);
         }
     });
-
-    // handling template files
+    // = = = = = = = = = = = = = = = = = = = = = = = =
+    // img loading src
     let $img_template = $('#template-thumb img');
-    let $upload_template = $('#upload-template');
-    let $link_template = $('#paste-template');
+    $img_template.on('load', function() {
+        let $card = $(this).closest('.card');
+        let src = $(this).attr('src');
+        if (src && $card.hasClass('border-is-mint')) {
+            switchContentState($(this));
+        } else if (! src && $card.hasClass('border-is-dark')) {
+            switchContentState($(this));
+        };
 
-    $img_template.load(function() {
-        if ($(this).attr('src')) switchContentState($(this));
+        let $card1 = $('.card').eq(0);
+        let $card2 = $('.card').eq(1);
+        if ($card1.hasClass('border-is-dark') && $card2.hasClass('border-is-dark')) generatePreview(preview_name);
     });
-
-    // TODO: change selector to variable
-    $('img.drop').error(function() {
+    // img error    TODO: change selector to variable
+    $('img.drop').on('error', function() {
         $link_template.val('');
 
+        let $card = $(this).closest('.card');
         let $card_image = $('#' + $(this).attr('data-card-img-id'));
+        $(this).removeAttr('src');
         $(this).hide();
         $card_image.find('.remove-content').hide();
         $card_image.find('.tag').show();
         $card_image.find('div.drop').show();
+
+        let $img = $(this);
+        if ($card.hasClass('border-is-dark')) switchContentState($img);
     });
 
+    // handling template files
+    let $upload_template = $('#upload-template');
+    let $link_template = $('#paste-template');
     $upload_template.change(function() {
         $link_template.val('');
 
@@ -213,15 +250,6 @@ $(function() {
         $.each(fileList, function(i, file) {
             addNames(fileList[i]);
         });
-
-        // TODO: when namesfile is uploaded:
-            // 1 if template is already uploaded:
-                // - automatically generate a preview using the first name it gets
-                // and the template uploaded
-            // 2 else:
-                // - wait for the template to get uploaded before generating
-
-
             // idea for notifying user of successful file upload:
             // 1 hide the dragzone box
     });
@@ -234,8 +262,6 @@ $(function() {
         setTimeout(function() {
             $paste_names.val('');
         }, 1000);
-
-        // TODO: a way to delete inputted names
     });
 
     // dropdown names
@@ -247,4 +273,31 @@ $(function() {
             switchContentState($(this));
         }
     });
+
+    // observes content changes, shows generate button & preview of certificate w/ name
+    const card1 = document.getElementsByClassName('card')[0];
+    const card2 = document.getElementsByClassName('card')[1];
+    const changes = {attributes: true};
+    const callback = function(mutation_list, observer) {
+        for (let mutation of mutation_list) {
+            if (mutation.type === 'attributes') {
+                let $card1 = $('.card').eq(0);
+                let $card2 = $('.card').eq(1);
+                if ($card1.hasClass('border-is-dark') && $card2.hasClass('border-is-dark')) {
+                    $('#generate').show();
+                    // TODO: generate and preview sample certificate
+                    generatePreview(preview_name);
+                    // IDEA: also add a circular edit button at lower right that allows user to edit the font and vertical placeholder
+                } else {
+                    $('#generate').hide();
+                    // TODO: remove sample certificate
+                };
+            };
+        };
+    };
+    const content_observer = new MutationObserver(callback);
+    content_observer.observe(card1, changes);
+    content_observer.observe(card2, changes);
+    content_observer.observe($('#template-thumb img')[0], changes);
+
 });

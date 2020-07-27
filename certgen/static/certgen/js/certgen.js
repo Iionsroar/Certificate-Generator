@@ -13,6 +13,7 @@ function generatePreview(name, font="serif") {
     let template = new Image();
     template.src = $('#template-thumb img').attr('src');
 
+    // TODO: change canvas drawing size to the template's
     ctx.clearRect(0, 0, 480, 320);
     ctx.drawImage(template, 0, 0, 480, 320);
 
@@ -20,8 +21,6 @@ function generatePreview(name, font="serif") {
     ctx.textAlign = 'center';
     ctx.fillText(name, 240, 200);
 
-    // TODO: manage previewing certificate in second card
-    // $('canvas').show();
     $('#certificate-thumb img').attr('src', $('canvas')[0].toDataURL('image/png', 1)).show();
     $('#certificate-thumb .dropbox').hide();
 
@@ -32,14 +31,13 @@ function addImg(imgObj, src) {
     let $card_image = $('#'+$imgObj.attr('data-card-img-id'));
     $imgObj.attr('src', src);
     if (! $imgObj.is(':visible')) {
-        $card_image.find('.tag').hide().delay(250).fadeIn();
+        // TO DELETE WHEN FINALIZED $card_image.find('.tag').hide().delay(250).fadeIn();
         $card_image.find('.drop, .delete').toggle();
     }
 }
 
 
 let names = [];
-let preview_name;
 function pushName(name) {
     let nameObj = {"name": name};
     let dropdown_template = $('#dropdown-item-template').html();
@@ -50,8 +48,8 @@ function pushName(name) {
     $('#names-counter').val(val + 1).trigger('change');
 }
 
+let preview_name;
 function addNames(file) {
-    // TODO: render a preview thumbnail using the first name in the file that is just sent as sample, then change img src
     // sheetjs
     if (! file.type) { // if argument is an array
         preview_name = file[0];
@@ -89,7 +87,6 @@ function addNames(file) {
 
 // drop zone
 function dropHandler(ev, target) {
-    // maybe youll do a different function for handling file drops
     ev.preventDefault();
 
     let file;
@@ -132,7 +129,7 @@ function dragOverHandler(ev) {
 
 $(function() {
     // previewing images using modals
-    $('img.drop').click(function() {
+    $('figure img').click(function() {
         let modal_id = $(this).attr('data-modal-id');
         let img_src = $(this).attr('src');
         $('#'+modal_id+' img').attr('src', img_src);
@@ -153,7 +150,7 @@ $(function() {
         $card.toggleClass('border-is-dark border-is-mint')
         $card_content.toggleClass('border-is-dark border-is-mint')
         $card.find('span.lbl').toggleClass('is-dark is-mint');
-        $card.find('.dropdown').toggle();
+        $card.find('.dropdown').toggleClass('is-hidden');
     }
     // removing uploaded files
     $('.card').delegate('.remove-content', 'click',  function() {
@@ -166,11 +163,16 @@ $(function() {
             $card_image.find('.tag').show();
             $card_image.find('div.drop').toggle();
 
+            // SOLVE: div.dropbox for second card not showing
+            // let $cards = $('.card');
+            // $cards.find('img.drop').attr('src', '').toggle();
+            // $cards.find('.tag').show();
+            // $cards.find('div.drop').toggle();
+
             switchContentState($(this));
 
         } else if ($(this).attr('data-type-to-remove') == 'name') {
-            let $item = $(this).closest('.dropdown-item')
-
+            let $item = $(this).closest('.dropdown-item');
             let name_index = $item.index();
             names.splice(name_index, 1);
 
@@ -284,13 +286,14 @@ $(function() {
                 let $card1 = $('.card').eq(0);
                 let $card2 = $('.card').eq(1);
                 if ($card1.hasClass('border-is-dark') && $card2.hasClass('border-is-dark')) {
-                    $('#generate').show();
-                    // TODO: generate and preview sample certificate
+                    $('#generate').removeClass('is-hidden');
                     generatePreview(preview_name);
                     // IDEA: also add a circular edit button at lower right that allows user to edit the font and vertical placeholder
                 } else {
-                    $('#generate').hide();
-                    // TODO: remove sample certificate
+                    $('#generate').addClass('is-hidden');
+                    // TODO: remove certificate preview, issues with div.drop of 2nd card
+                    // $card2.find('figure img').attr('src', '').hide();
+                    // $card2.find('div.drop').show();
                 };
             };
         };

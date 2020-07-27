@@ -116,7 +116,7 @@ div.dropbox {
     display: block;
 }
 /* =============================================*/
-img.drop, .tag, .delete, .dropdown, #names-counter, #generate, canvas {
+img.drop, .tag, .delete {
     /* .tag is hidden so js hover function can work accordingly */
     /* .delete will appear once image is uploaded */
     display: none;

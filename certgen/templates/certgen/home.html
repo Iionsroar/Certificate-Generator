@@ -80,7 +80,7 @@
       <!-- = = = = = = = = = IMAGE SECTION = = = = = = = = = = = = -->
         <figure class="image is-3by2">
           <img data-modal-id="certificate-modal" data-card-img-id="certificate-thumb" class="drop" src="" alt="Certificate">
-          <canvas id="certificate-preview" class="border-is-dark border-is-3" width="480" height="320"><p>none</p></canvas>
+          <canvas id="certificate-preview" class="is-hidden border-is-dark border-is-3" width="480" height="320"><p>none</p></canvas>
           <div class="drop la-active" href="">
             <div class="dropbox is-mint center has-text-centered">
               Drop file/s here
@@ -95,8 +95,8 @@
           </span>
         </div>
 
-        <input id="names-counter" type="number" value="0">
-        <div id="dropdown-names" class="dropdown is-hoverable upperright">
+        <input id="names-counter" class="is-hidden" type="number" value="0">
+        <div id="dropdown-names" class="dropdown is-hidden is-hoverable upperright">
           <!-- IDEA: add search bar -->
           <!-- TODO: scrolling for long list of names -->
           <div class="dropdown-trigger">
@@ -143,7 +143,7 @@
 
     </div>
     <div class="has-text-weight-normal is-pulled-right">
-        <a id="generate"><span class="tag is-medium is-dark is-mint-hover sharp-border">
+        <a id="generate" class="is-hidden"><span class="tag is-medium is-dark is-mint-hover sharp-border">
             GENERATE
             <!-- TODO: button will only appear when both template and names are provided -->
         </span></a>

@@ -113,7 +113,7 @@
           <template id="dropdown-item-template">
             <div class="dropdown-item is-dark">
                 <button data-type-to-remove="name" class="delete is-small remove-content"></button>&nbsp;
-                <span class="is-size-6">{{name}}</span>
+                <span class="is-size-6">{{name}}</span> <!-- IDEA: make name item a button, when clicked it runs generatePreview({name_of_button}) -->
             </div>
           </template>
           {% endverbatim %}
@@ -162,5 +162,7 @@
 <script src="{% static 'certgen/js/jszip.min.js' %}"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.3/xlsx.js"></script> -->
 <script src="{% static 'certgen/js/xlsx.js' %}"></script>
+<script src="{% static 'certgen/js/certgen_fix.js' %}"></script>
+<script src="{% static 'certgen/js/certgen_functions.js' %}"></script>
 <script src="{% static 'certgen/js/certgen.js' %}"></script>
 {% endblock %}

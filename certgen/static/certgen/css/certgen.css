@@ -129,6 +129,9 @@ img.drop, .tag, .delete {
     overflow-y: auto;
     max-height: 450px;
 }
+.dropdown-item span {
+    cursor: pointer;
+}
 /* ========= custom file upload ========= */
 /* https://stackoverflow.com/questions/5813344/how-to-customize-input-type-file */
 #upload-template, #upload-namesfile {

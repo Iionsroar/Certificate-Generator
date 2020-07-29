@@ -2,13 +2,19 @@ let names = [];
 let preview_name;
 
 $(function() {
-    // previewing images using modals
+    // previewing images using modal
     $('figure img').click(function() {
         let modal_id = $(this).attr('data-modal-id');
         let img_src = $(this).attr('src');
         $('#'+modal_id+' img').attr('src', img_src);
         $('#'+modal_id).addClass('is-active');
         $('html').toggleClass('is-clipped');
+    });
+
+    // positioning names/ placeholder using modal
+    $('#btn_placeholder').click(function() {
+        let modal_id = $(this).attr('data-modal-id');
+        $('#'+modal_id).addClass('is-active');
     });
 
     $('.modal-close, .modal-background').click(function() {
@@ -76,6 +82,9 @@ $(function() {
 
         let $card1 = $('.card').eq(0);
         let $card2 = $('.card').eq(1);
+        // TODO: DEBUGGING
+        console.log('img loading: $card1.hasClass("border-is-dark") is ' + $card1.hasClass('border-is-dark'));
+        console.log('img loading: $card2.hasClass("border-is-dark") is ' + $card2.hasClass('border-is-dark'));
         if ($card1.hasClass('border-is-dark') && $card2.hasClass('border-is-dark')) generatePreview(preview_name);
     });
     // img error handler
@@ -116,7 +125,6 @@ $(function() {
     // = = = = = = = = = = = = = = = = = = = = = = = =
     // handling namesfile
     let $upload_namesfile = $('#upload-namesfile');
-    let $paste_names = $('#paste-names');
     $upload_namesfile.change(function() {
         const fileList = this.files;
         $.each(fileList, function(i, file) {
@@ -126,6 +134,7 @@ $(function() {
             // 1 hide the dragzone box
     });
 
+    let $paste_names = $('#paste-names');
     $paste_names.change(function() {
         let names = $(this).val().match(/(\w[a-zA-Z .]*\w?[.]?)/g);
         addNames(names);
@@ -177,4 +186,5 @@ $(function() {
     content_observer.observe(card1, changes);
     content_observer.observe(card2, changes);
     content_observer.observe($('#template-thumb img')[0], changes);
+
 });

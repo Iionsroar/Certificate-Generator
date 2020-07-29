@@ -4,6 +4,7 @@
 {% block styles %}
 <link rel="stylesheet" href="{% static 'certgen/css/certgen.css' %}">
 <link rel="stylesheet" href="{% static 'certgen/css/colors.css' %}">
+<link rel="stylesheet" href="{% static 'certgen/css/slider.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -13,6 +14,30 @@
     <p class="image is-4by3"><img src=""></p>
   </div>
   <button data-modal-id="certificate-modal" class="modal-close is-large" aria-label="close"></button>
+</div>
+
+<div id="placeholder" class="modal">
+  <!-- TODO, DOING -->
+  <div data-modal-id="certificate-modal" class="modal-background"></div>
+  <div class="modal-content">
+    <div class="card">
+      <div class="card-image is-relative">
+        <figure class="image is-3by2">
+          <img src="https://bulma.io/images/placeholders/1280x960.png">
+          <!-- TODO: check height and width -->
+          <!-- <canvas id="adjust-certificate" class="is-hidden border-is-dark border-is-3" width="480" height="320"><p>none</p></canvas> -->
+        </figure>
+      </div>
+
+      <div class="card-content">
+        <div class="slidecontainer columns is-centered">
+          <input type="range" name="slider-placeholder" id="slider-placeholder" class="slider" min="1" max="100" value="80">
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <button data-modal-id="placeholder" class="modal-close is-large" aria-label="close"></button>
 </div>
 
 <div class="columns is-9 is-variable">
@@ -63,7 +88,7 @@
     </div>
 
     <div class="has-text-weight-normal">
-        <a><span class="tag is-medium is-dark is-mint-hover sharp-border">
+        <a id="btn_placeholder" data-modal-id="placeholder"><span class="tag is-medium is-dark is-mint-hover sharp-border">
             POSITION PLACEHOLDER
         </span></a>
     </div>
@@ -85,6 +110,7 @@
             <div class="dropbox is-mint center has-text-centered">
               Drop file/s here
               <!-- TODO: toast when file is successfully uploaded or dropped -->
+              <!-- TODO: additional toast for successful upload saying: "you can upload additional files or type more names to include in the list" -->
             </div>
           </div>
         </figure>
@@ -98,7 +124,6 @@
         <input id="names-counter" class="is-hidden" type="number" value="0">
         <div id="dropdown-names" class="dropdown is-hidden is-hoverable upperright">
           <!-- IDEA: add search bar -->
-          <!-- TODO: scrolling for long list of names -->
           <div class="dropdown-trigger">
             <a>
               <span class="tag is-medium is-dark is-mint-hover sharp-border" aria-haspopup="true" aria-controls="dropdown-menu4">
@@ -145,24 +170,27 @@
     <div class="has-text-weight-normal is-pulled-right">
         <a id="generate" class="is-hidden"><span class="tag is-medium is-dark is-mint-hover sharp-border">
             GENERATE
-            <!-- TODO: button will only appear when both template and names are provided -->
         </span></a>
     </div>
   <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
   </div>
 
   <div class="column">
-<!--     <canvas id="certificate-preview" class="border-is-dark border-is-3" width="480" height="320"><p>none</p></canvas> -->
   </div>
 </div>
 {% endblock %}
 
 {% block scripts %}
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.3/jszip.min.js"></script> -->
+<!-- <script>
+  let preview_name;
+  console.log(preview_name);
+</script> -->
 <script src="{% static 'certgen/js/jszip.min.js' %}"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.3/xlsx.js"></script> -->
 <script src="{% static 'certgen/js/xlsx.js' %}"></script>
 <script src="{% static 'certgen/js/certgen_fix.js' %}"></script>
 <script src="{% static 'certgen/js/certgen_functions.js' %}"></script>
 <script src="{% static 'certgen/js/certgen.js' %}"></script>
+<script src="{% static 'certgen/js/slider.js' %}"></script>
 {% endblock %}

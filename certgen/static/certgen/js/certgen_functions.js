@@ -1,5 +1,6 @@
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-function generatePreview(name, font="serif") {
+function generatePreview(name, imgSelector="#certificate-thumb img", vPos=200, font="serif") {
+    // IDEA: code that scans image using js img library for the thickest space, suitable for adding lines
     let ctx = $('#certificate-preview')[0].getContext('2d');
     let template = new Image();
     template.src = $('#template-thumb img').attr('src');
@@ -10,9 +11,9 @@ function generatePreview(name, font="serif") {
 
     ctx.font = 'bold 18px Merriweather';
     ctx.textAlign = 'center';
-    ctx.fillText(name, 240, 200);
+    ctx.fillText(name, 240, vPos);
 
-    $('#certificate-thumb img').attr('src', $('canvas')[0].toDataURL('image/png', 1)).show();
+    $(imgSelector).attr('src', $('canvas')[0].toDataURL('image/png', 1)).show();
     $('#certificate-thumb .dropbox').hide();
 
 };
@@ -37,7 +38,8 @@ function pushName(name) {
 function addNames(file) {
     // sheetjs
     if (! file.type) { // if argument is an array
-        preview_name = file[0];
+        // preview_name = file[0];
+        generatePreview(file[0]);
         $.each(file, function(i, f) {
             pushName(file[i]);
         });
@@ -52,22 +54,26 @@ function addNames(file) {
                 let is_first = true;
                 for (const [key, value] of Object.entries(workbook.Sheets.Sheet1)) {
                     name = (value['w']) ? value['w']:value['v'];
-                    if (is_first) preview_name = name;
+                    // if (is_first) preview_name = name;
+                    if (is_first) generatePreview(name);
+                    // console.log('inside: ' + preview_name); // TODO DEBUGGING
                     pushName(name);
                     is_first = false;
                 }
             } else if (file.type.endsWith('sheet')) {
                 // xlsx files
-                preview_name = workbook.Strings[0]['t'];
+                // preview_name = workbook.Strings[0]['t'];
+                generatePreview(workbook.Strings[0]['t']);
                 for (name of workbook.Strings) {
                     pushName(name['t']);
                 }
             };
-        }
+        };
         reader.readAsArrayBuffer(file);
     };
     // TODO: generatePreview runs only when template is provided
-    generatePreview(preview_name);
+    // console.log('outside: ' + preview_name); // TODO DEBUGGING
+    // generatePreview(preview_name);
 };
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =

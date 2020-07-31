@@ -31,7 +31,10 @@
 
       <div class="card-content">
         <div class="slidecontainer columns is-centered">
-          <input type="range" name="slider-placeholder" id="slider-placeholder" class="slider" min="1" max="100" value="80">
+          <div>
+            <label for="v-slider-placeholder">Vertical: </label><input type="range" name="v-slider-placeholder" id="v-slider-placeholder" class="slider" min="1" max="100" value="80">
+            <label for="h-slider-placeholder">Horizontal: </label><input type="range" name="h-slider-placeholder" id="h-slider-placeholder" class="slider" min="1" max="100" value="80">
+          </div>
         </div>
       </div>
 
@@ -45,7 +48,7 @@
 
   <div class="column is-4">
     <!-- certificate-template-card -->
-    <div class="card border-is-mint">
+    <div class="card main-card border-is-mint">
       <div id="template-thumb" class="card-image drop-zone" ondrop="dropHandler(event, this);" ondragover="dragOverHandler(event);">
         <!-- = = = = = = = = = IMAGE SECTION = = = = = = = = = = = = -->
         <figure class="image is-3by2">
@@ -98,7 +101,7 @@
 
   <div class="column is-4">
     <!-- names-card -->
-    <div id="names-card" class="card border-is-mint">
+    <div id="names-card" class="card main-card border-is-mint">
 
       <!-- TODO: alert leaving the site will reset content uploads -->
       <div id="certificate-thumb" class="card-image drop-zone" ondrop="dropHandler(event, this);" ondragover="dragOverHandler(event);">

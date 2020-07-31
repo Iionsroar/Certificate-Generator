@@ -155,4 +155,11 @@ label.upload-template, label.upload-namesfile {
     padding-top: 3px;
     padding-bottom: 0px;
 }
+/* =============================================*/
+.slidecontainer label {
+    margin-left: 5px;
+}
+/*.slidecontainer span {
+    display: inline !important;
+}*/
 

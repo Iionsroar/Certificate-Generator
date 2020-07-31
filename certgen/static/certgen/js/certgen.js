@@ -1,5 +1,4 @@
 let names = [];
-let preview_name;
 
 $(function() {
     // previewing images using modal
@@ -37,10 +36,16 @@ $(function() {
     function switchContentState(object) {
         let $card = object.closest('.card');
         let $card_content = $card.find('.card-content');
-        $card.toggleClass('border-is-dark border-is-mint')
-        $card_content.toggleClass('border-is-dark border-is-mint')
+        $card.toggleClass('border-is-dark border-is-mint');
+        $card_content.toggleClass('border-is-dark border-is-mint');
         $card.find('.tag.lbl').toggleClass('is-dark is-mint');
-        $card.find('.dropdown').toggleClass('is-hidden');
+        // $card.find('.dropdown').toggleClass('is-hidden');
+        // TODO: DEBUGGING; scenario: add photofile, add namesfile, remove photofile
+        if (names.length) {
+            $card.find('.dropdown').removeClass('is-hidden');
+        } else {
+            $card.find('.dropdown').addClass('is-hidden');
+        };
     };
     // =   =   =   =   =   =   =   =   =    =   =   =
     // removing uploaded files
@@ -54,18 +59,32 @@ $(function() {
             $card_image.find('.tag').show();
             $card_image.find('div.drop').toggle();
 
+            $('#upload-template').val('');
+            // TODO: $card{num} is often used, maybe make it global
+            let $card2 = $('.column .is-4 .card').eq(1);
+            if ($card2.hasClass('border-is-dark')) {
+                $card2.find('img').attr('src', '').hide();
+                $card2.find('.dropbox').show();
+            };
+
             switchContentState($(this));
 
         } else if ($(this).attr('data-type-to-remove') == 'name') {
             let $item = $(this).closest('.dropdown-item');
+            let $card = $item.closest('.card');
             let name_index = $item.index();
             names.splice(name_index, 1);
+            window.preview_name = names[0];
 
             let val = Number($('#names-counter').val());
             $('#names-counter').val(val - 1).trigger('change');
 
             $item.remove();
-            if (names.length) generatePreview(names[0]);
+            if (names.length) {
+                generatePreview(names[0])
+            } else {
+                $card.find('.tag.lbl').show();
+            };
         }
     });
     // = = = = = = = = = = = = = = = = = = = = = = = =
@@ -80,22 +99,19 @@ $(function() {
             switchContentState($(this));
         };
 
-        let $card1 = $('.card').eq(0);
-        let $card2 = $('.card').eq(1);
-        // TODO: DEBUGGING
-        console.log('img loading: $card1.hasClass("border-is-dark") is ' + $card1.hasClass('border-is-dark'));
-        console.log('img loading: $card2.hasClass("border-is-dark") is ' + $card2.hasClass('border-is-dark'));
-        if ($card1.hasClass('border-is-dark') && $card2.hasClass('border-is-dark')) generatePreview(preview_name);
+        let $card1 = $('.column .is-4 .card').eq(0);
+        let $card2 = $('.column .is-4 .card').eq(1);
+        if ($card1.hasClass('border-is-dark') && $card2.hasClass('border-is-dark')) generatePreview(window.preview_name);
     });
     // img error handler
-    $('img.drop').on('error', function() {
+    $('#template-thumb img.drop').on('error', function() {
         $link_template.val('');
 
         let $card = $(this).closest('.card');
         let $card_image = $('#' + $(this).attr('data-card-img-id'));
         $(this).removeAttr('src');
         $(this).hide();
-        $card_image.find('.remove-content').hide();
+        $card_image.find('#template-thumb .remove-content').hide();
         $card_image.find('.tag').show();
         $card_image.find('div.drop').show();
 
@@ -105,7 +121,6 @@ $(function() {
 
     // handling img template files
     let $upload_template = $('#upload-template');
-    let $link_template = $('#paste-template');
     $upload_template.change(function() {
         $link_template.val('');
 
@@ -116,6 +131,7 @@ $(function() {
         addImg($dropPreview, URL.createObjectURL(file));
     });
 
+    let $link_template = $('#paste-template');
     $link_template.change(function() {
         let card_image_id = $(this).attr('data-card-img-id');
         let $dropPreview = $('#'+card_image_id + ' figure img');
@@ -129,7 +145,10 @@ $(function() {
         const fileList = this.files;
         $.each(fileList, function(i, file) {
             addNames(fileList[i]);
+            // generatePreview(window.preview_name);
         });
+        $(this).val('');
+        console.log(window.preview_name);
             // idea for notifying user of successful file upload:
             // 1 hide the dragzone box
     });
@@ -138,6 +157,7 @@ $(function() {
     $paste_names.change(function() {
         let names = $(this).val().match(/(\w[a-zA-Z .]*\w?[.]?)/g);
         addNames(names);
+        generatePreview(window.preview_name);
 
         $(this).val('added!');
         setTimeout(function() {
@@ -164,17 +184,17 @@ $(function() {
     });
 
     // observes content changes, shows generate button & preview of certificate w/ name
-    const card1 = document.getElementsByClassName('card')[0];
-    const card2 = document.getElementsByClassName('card')[1];
+    const card1 = document.getElementsByClassName('main-card')[0];
+    const card2 = document.getElementsByClassName('main-card')[1];
     const changes = {attributes: true};
     const callback = function(mutation_list, observer) {
         for (let mutation of mutation_list) {
             if (mutation.type === 'attributes') {
-                let $card1 = $('.card').eq(0);
-                let $card2 = $('.card').eq(1);
+                let $card1 = $('.column .is-4 .card').eq(0);
+                let $card2 = $('.column .is-4 .card').eq(1);
                 if ($card1.hasClass('border-is-dark') && $card2.hasClass('border-is-dark')) {
                     $('#generate').removeClass('is-hidden');
-                    generatePreview(preview_name);
+                    generatePreview(window.preview_name);
                     // IDEA: also add a circular edit button at lower right that allows user to edit the font and vertical placeholder
                 } else {
                     $('#generate').addClass('is-hidden');
@@ -187,4 +207,5 @@ $(function() {
     content_observer.observe(card2, changes);
     content_observer.observe($('#template-thumb img')[0], changes);
 
+    // TODO: clicking generate button triggers the placeholder modal of editing certificate
 });

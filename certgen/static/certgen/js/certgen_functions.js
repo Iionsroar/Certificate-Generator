@@ -1,5 +1,5 @@
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-function generatePreview(name, imgSelector="#certificate-thumb img", vPos=200, font="serif") {
+function generatePreview(name, imgSelector="#certificate-thumb img", vPos=200, hPos=240, font="serif") {
     // TODO: DEBUGGING
     // run only when card1 is active
     let $card1 = $('.column .is-4 .card').eq(0);
@@ -15,9 +15,10 @@ function generatePreview(name, imgSelector="#certificate-thumb img", vPos=200, f
 
         ctx.font = 'bold 18px Merriweather';
         ctx.textAlign = 'center';
-        ctx.fillText(name, 240, vPos);
+        ctx.fillText(name, hPos, vPos);
 
         $(imgSelector).attr('src', $('canvas')[0].toDataURL('image/png', 1)).show();
+        $("img#edit_preview").attr('src', $('canvas')[0].toDataURL('image/png', 1));
         $('#certificate-thumb .dropbox').hide();
     };
 

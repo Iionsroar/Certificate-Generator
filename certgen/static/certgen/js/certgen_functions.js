@@ -61,18 +61,19 @@ function addNames(file) {
                 for (const [key, value] of Object.entries(workbook.Sheets.Sheet1)) {
                     name = (value['w']) ? value['w']:value['v'];
                     if (is_first) window.preview_name = name;
-                    if (is_first && $card1.hasClass('border-is-dark')) generatePreview(window.preview_name);
+                    // if (is_first && $card1.hasClass('border-is-dark')) generatePreview(window.preview_name);
                     pushName(name);
                     is_first = false;
                 }
             } else if (file.type.endsWith('sheet')) {
                 // xlsx files
                 window.preview_name = workbook.Strings[0]['t'];
-                generatePreview(window.preview_name)
+                // generatePreview(window.preview_name)
                 for (name of workbook.Strings) {
                     pushName(name['t']);
                 };
             };
+            generatePreview(window.preview_name);
         };
         reader.readAsArrayBuffer(file);
     };
@@ -97,7 +98,7 @@ function dropHandler(ev, target) {
                     file = dropItem;
                 };
                 addNames(file);
-                generatePreview(window.preview_name);
+                // generatePreview(window.preview_name);
             };
         };
 

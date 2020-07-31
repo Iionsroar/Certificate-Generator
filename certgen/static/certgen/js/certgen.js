@@ -145,10 +145,8 @@ $(function() {
         const fileList = this.files;
         $.each(fileList, function(i, file) {
             addNames(fileList[i]);
-            // generatePreview(window.preview_name);
         });
         $(this).val('');
-        console.log(window.preview_name);
             // idea for notifying user of successful file upload:
             // 1 hide the dragzone box
     });
@@ -194,7 +192,7 @@ $(function() {
                 let $card2 = $('.column .is-4 .card').eq(1);
                 if ($card1.hasClass('border-is-dark') && $card2.hasClass('border-is-dark')) {
                     $('#generate').removeClass('is-hidden');
-                    generatePreview(window.preview_name);
+                    // generatePreview(window.preview_name);
                     // IDEA: also add a circular edit button at lower right that allows user to edit the font and vertical placeholder
                 } else {
                     $('#generate').addClass('is-hidden');

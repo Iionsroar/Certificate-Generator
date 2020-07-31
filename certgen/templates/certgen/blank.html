@@ -1,0 +1,76 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blank Page</title>
+    <style type="text/css">
+      canvas { border: 1px solid black; }
+    </style>
+</head>
+
+<body>
+<canvas id="tutorial"></canvas>
+
+</body>
+</html> -->
+{% extends 'certgen/layout.html' %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'certgen/css/certgen.css' %}">
+<link rel="stylesheet" href="{% static 'certgen/css/colors.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="content">
+    <form id="course-content-form">
+        <div class="field">
+            <label class="label">Weeks</label>
+            <div class="control">
+                <input id="weeks" type="number" class="input" min="1" max="99" required>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Hours</label>
+            <div class="control">
+                <input id="hours" type="number" class="input" min="1" max="24" required> <!-- max=3? -->
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Learning Outcomes</label>
+            <div class="control">
+                <textarea id="learning_outcomes" class="textarea" placeholder="At the end of the lesson, the learner will be able to:" required></textarea>
+                <!-- TODO: see if there's a default new line at the text area -->
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Topics</label>
+            <div class="control">
+                <textarea id="topics" class="textarea" required></textarea>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Teaching Learning Activities</label>
+            <div class="control">
+                <textarea id="activities" class="textarea" required></textarea>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Assessment</label>
+            <div class="control">
+                <textarea id="assessment" class="textarea" required></textarea>
+            </div>
+        </div>
+
+        <div>
+            <button class="button">submit</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.3/xlsx.js"></script>
+<script src="{% static 'certgen/js/blank.js' %}"></script>
+{% endblock %}

@@ -1,16 +1,113 @@
-<nav>
-  <div class="nav-wrapper">
-    <a href="/" class="brand-logo" style="font-family: 'Crimson Text', serif; font-size: 40px">Certificate Generator</a>
-    <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a href="/">Home</a></li>
-      <li><a href="https://discord.gg/sentdex">Community</a></li>
-      {% if user.is_authenticated %}
-        <li><a href="/account">{{user.username|title}}</a></li>
-        <li><a href="/logout">Logout</a></li>
-      {% else %}
-        <li><a href="/login">Login</a></li>
-        <li><a href="/register">Register</a></li>
-      {% endif %}
-    </ul>
+<nav class="navbar is-mint" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a id="app-name" class="navbar-item is-mint-hover is-size-3" href="/">
+      <!-- src = rnd logo -->
+      <!-- <img src="" width="112" height="28"> -->
+      <span class="has-text-dark">Certificate&nbsp;</span>
+      <span class="has-text-white">Generator</span>
+    </a>
+
+    <div class="navbar-item is-mint-hover">
+      <div class="field is-grouped has-icons-left">
+        <p class="control">
+          <a href="https://github.com/yulyen/certificate_generator/tree/LAdevelop" class="tag is-small is-dark" target="_blank">
+            <span class="icon is-left"><i class="fab fa-github fa-lg"></i></span>
+            <span>Github</span>
+          </a>
+        </p>
+      </div>
+    </div>
+
+    <a class="navbar-burger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </a>
+  </div>
+
+  <!-- TODO: adjust hovering for burger label hovers too  -->
+  <!-- TODO: hover by cs instead of js bcs js (actually, try refreshing the page while pointing at a navbar button) -->
+  <div id="mobile" class="navbar-menu">
+    <div class="navbar-start">
+
+    </div>
+
+    <div class="navbar-end">
+      <!-- <div class="navbar-item is-mint-hover">
+        <a href="">
+          <span class="icon has-text-white la-js-btn">
+            <i class="fas fa-question-circle fa-lg"></i>
+          </span>
+          <span class="is-size-6 has-text-dark la-js-navlabel">Help</span>
+        </a>
+      </div> -->
+
+      <div class="navbar-item is-mint-hover is-relative">
+        <div class="dropdown is-hoverable">
+          <div class="dropdown-trigger">
+            <a href="">
+              <span class="icon has-text-white la-js-btn">
+                <i class="fas fa-question-circle fa-lg"></i>
+              </span>
+              <span class="is-size-6 has-text-dark la-js-navlabel">Help</span>
+            </a>
+          </div>
+          <div class="dropdown-menu is-dark" role="menu">
+            <div class="dropdown-content is-dark"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="navbar-item is-mint-hover is-relative">
+        <div class="dropdown is-hoverable">
+          <div class="dropdown-trigger">
+            <a href="">
+              <span class="icon has-text-white la-js-btn">
+                <i class="fas fa-cog fa-lg"></i>
+              </span>
+              <span class="is-size-6 has-text-dark la-js-navlabel">Settings</span>
+            </a>
+          </div>
+          <div class="dropdown-menu is-dark" role="menu">
+            <div class="dropdown-content is-dark"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="navbar-item is-mint-hover is-relative">
+        <div class="dropdown is-hoverable">
+          <div class="dropdown-trigger">
+            <a href="">
+              <span class="icon has-text-white la-js-btn">
+                <i class="fas fa-th fa-lg"></i>
+              </span>
+              <span class="is-size-6 has-text-dark la-js-navlabel">View Generated</span>
+            </a>
+          </div>
+          <div class="dropdown-menu is-dark" role="menu">
+            <div class="dropdown-content is-dark"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="navbar-item is-mint-hover">
+        <a href="">
+          <span class="icon has-text-white la-js-btn">
+            <i class="fas fa-cog fa-lg"></i>
+          </span>
+          <span class="is-size-6 has-text-dark la-js-navlabel">Settings</span>
+        </a>
+      </div>
+
+      <div class="navbar-item is-mint-hover">
+        <a href="">
+          <span class="icon has-text-white la-js-btn">
+            <i class="fas fa-th fa-lg"></i>
+          </span>
+          <span class="is-size-6 has-text-dark la-js-navlabel">View Generated</span>
+        </a>
+      </div> -->
+
+    </div>
   </div>
 </nav>

@@ -1,40 +1,47 @@
+from django.core.exceptions import ValidationError
+from django.core.files import File
+from django.conf import settings
 from django.db import models
-from datetime import datetime
+import requests
+import os
 
 # Create your models here.
-class TutorialCategory(models.Model):
-    tutorial_category = models.CharField(max_length=200)
-    category_summary = models.CharField(max_length=200)
-    category_slug = models.CharField(max_length=200, default=1)
+# class Certificate(models.Model):
+#     # explore corey schafer api tutorials: https://www.youtube.com/user/schafer5/videos
+#     certificate_name = models.CharField(max_length=50)
+#     template_img = models.ImageField(blank=True, default='', upload_to='certificate_templates')
+#     template_url = models.URLField(blank=True, default='')
+#     names_csv = models.TextField(blank=True, default='')
+#     names_file = models.FileField(blank=True, default='', upload_to='names_files') #TODO
+#     Y_RATIO = 1.6268
 
-    class Meta:
-        verbose_name_plural = 'Category'
+#     def get_remote_image(self):
+#         # reference: https://stackoverflow.com/questions/16381241/django-save-image-from-url-and-connect-with-imagefield
+#         if self.template_url and not self.template_img:
+#             img_result = requests.get(self.template_url)
+#             img_name = os.path.basename(self.template_url)
+#             with open(os.path.join(TEMP_DIR, img_name), 'wb') as img_file:
+#                 img_file.write(img_result.content)
+#             self.template_img.save(
+#                 img_name,
+#                 open(os.path.join(TEMP_DIR, img_name), 'rb')
+#                 )
+#             self.save()
 
-    def __str__(self):
-        return self.tutorial_category
+#     def clean(self):
+#         # reference: https://stackoverflow.com/questions/2151966/conditionally-require-only-one-field-in-django-model-form/2151974
+#         if not self.template_img and not self.template_url:
+#             raise ValidationError({'template_img': 'Either one of template_img or template_url should have a value.'})
+#         if not self.names_csv and not self.names_file:
+#             raise ValidationError({'names_csv': 'Either one of names_csv or names_file should have a value.'})
 
 
-class TutorialSeries(models.Model):
-    tutorial_series = models.CharField(max_length=200)
-
-    tutorial_category = models.ForeignKey(TutorialCategory, default=1, verbose_name="Category", on_delete=models.SET_DEFAULT)
-    series_summary = models.CharField(max_length=200)
-
-    class Meta:
-        verbose_name_plural = 'Series'
-
-    def __str__(self):
-        return self.tutorial_series
+#     def save(self):
+#         if self.template_url and not self.template_img:
+#             self.get_remote_image()
+#             super().save()
 
 
-class Tutorial(models.Model):
-    title = models.CharField(max_length=200)
-    content = models.TextField()
-    published = models.DateTimeField('date published', default=datetime.now)
-
-    tutorial_series = models.ForeignKey(TutorialSeries, default=1, verbose_name="Series", on_delete=models.SET_DEFAULT)
-    tutorial_slug = models.CharField(max_length=200, default=1)
-
-    def __str__(self):
-        return self.title
+#     def __str__(self):
+#         return self.certificate_name
 

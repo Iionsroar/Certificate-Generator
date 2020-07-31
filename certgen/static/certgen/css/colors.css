@@ -1,0 +1,91 @@
+:root {
+    --green: #aacab1;
+    --black: #363636;
+    --white: #fff;
+}
+/* = = = = = = = = = = = = = = = = = = = = = = = =  */
+input.is-dark {
+    background-color: var(--black) !important;
+    color: var(--green) !important;
+}
+span.is-dark, input.is-dark::placeholder {
+    color: var(--green) !important;
+}
+div.is-dark {
+    background-color: var(--black) !important;
+    color: var(--green) !important;
+}
+.dropdown-item.is-dark:hover {
+    background-color: var(--green) !important;
+    color: var(--black) !important;
+}
+.is-mint {
+    background-color: var(--green) !important;
+    color: var(--white) !important;
+}
+.is-mint-hover:hover {
+    background-color: var(--green) !important;
+    color: var(--white) !important;
+}
+.is-reverse-mint {
+    background-color: var(--white) !important;
+    border-color: var(--green) !important;
+    color: var(--green) !important;
+}
+.is-reverse-mint:hover {
+    background-color: var(--black) !important;
+    border-width: 2px;
+}
+.is-reverse-mint:focus {
+    background-color: var(--black) !important;
+}
+a span.is-mint:hover {
+    color: var(--black) !important;
+}
+
+
+.has-text-mint {
+    color: var(--green);
+}
+label.has-text-mint:hover {
+    color: var(--black);
+}
+label.has-text-dark:hover {
+    color: var(--green) !important;
+}
+.navbar .icon.has-text-white:hover {
+    color: var(--black) !important;
+}
+
+
+input[type=text]::placeholder {
+    color: var(--white);
+}
+input[type=text]:hover {
+    border-color: var(--green);
+    box-shadow: none;
+}
+input[type=text]:focus {
+    border-color: var(--green);
+    box-shadow: none;
+}
+/*input:focus, select:focus {
+    box-shadow: 0 3px 5px #333;
+    box-shadow: none;
+    outline: none;
+    outline-offset: none;
+    outline-style:
+}*/
+
+div.dropbox.is-mint {
+    color: var(--green) !important;
+    background-color: var(--white) !important;
+    border-color: var(--green) !important;
+}
+
+.border-is-mint {
+    border-color: var(--green);
+}
+.border-is-dark {
+    border-color: var(--black);
+}

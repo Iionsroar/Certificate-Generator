@@ -1,0 +1,16 @@
+/* ========= hovering navbar icons =============*/
+.navbar-brand .field {
+    margin-top: 10%;
+}
+
+.navbar-end {
+    padding-right: 5%;
+}
+
+.navbar-item .dropdown {
+    display: inline;
+}
+
+.la-js-navlabel {
+    display: none;
+}

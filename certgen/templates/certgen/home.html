@@ -1,76 +1,199 @@
-{% extends 'certgen/header.html' %}
+{% extends 'certgen/layout.html' %}
+{% load static %}
+
+{% block styles %}
+<link rel="stylesheet" href="{% static 'certgen/css/certgen.css' %}">
+<link rel="stylesheet" href="{% static 'certgen/css/colors.css' %}">
+<link rel="stylesheet" href="{% static 'certgen/css/slider.css' %}">
+{% endblock %}
 
 {% block content %}
-{% load static %}
-<div class="columns is-6 is-variable">
+<div id="certificate-modal" class="modal">
+  <div data-modal-id="certificate-modal" class="modal-background"></div>
+  <div class="modal-content">
+    <p class="image is-4by3"><img src=""></p>
+  </div>
+  <button data-modal-id="certificate-modal" class="modal-close is-large" aria-label="close"></button>
+</div>
+
+<div id="placeholder" class="modal">
+  <!-- TODO, DOING -->
+  <div data-modal-id="certificate-modal" class="modal-background"></div>
+  <div class="modal-content">
+    <div class="card">
+      <div class="card-image is-relative">
+        <figure class="image is-3by2">
+          <img src="https://bulma.io/images/placeholders/1280x960.png">
+          <!-- TODO: check height and width -->
+          <!-- <canvas id="adjust-certificate" class="is-hidden border-is-dark border-is-3" width="480" height="320"><p>none</p></canvas> -->
+        </figure>
+      </div>
+
+      <div class="card-content">
+        <div class="slidecontainer columns is-centered">
+          <div>
+            <label for="v-slider-placeholder">Vertical: </label><input type="range" name="v-slider-placeholder" id="v-slider-placeholder" class="slider" min="1" max="100" value="80">
+            <label for="h-slider-placeholder">Horizontal: </label><input type="range" name="h-slider-placeholder" id="h-slider-placeholder" class="slider" min="1" max="100" value="80">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <button data-modal-id="placeholder" class="modal-close is-large" aria-label="close"></button>
+</div>
+
+<div class="columns is-9 is-variable">
   <div class="column"></div>
 
   <div class="column is-4">
     <!-- certificate-template-card -->
-    <div class="card is-overlay la-relative la-card-border-3">
-      <div class="card-image">
-        <figure class="image is-3by2 la-relative">
-          <img src="" alt="Certificate">
-          <div class="la-drag-drop has-text-centered la-absolute-centered">Drop image here</div>
+    <div class="card main-card border-is-mint">
+      <div id="template-thumb" class="card-image drop-zone" ondrop="dropHandler(event, this);" ondragover="dragOverHandler(event);">
+        <!-- = = = = = = = = = IMAGE SECTION = = = = = = = = = = = = -->
+        <figure class="image is-3by2">
+          <img data-modal-id="certificate-modal" data-card-img-id="template-thumb" class="drop" src="" alt="Certificate">
+          <div class="drop la-active" href="">
+            <div class="dropbox is-mint center has-text-centered">
+              Drop image here
+            </div>
+          </div>
         </figure>
-        <div class="has-text-weight-normal la-absolute-upperleft">
-          <span class="tag is-medium has-text-white la-is-mint">
+
+        <div class="has-text-weight-normal upperleft">
+          <span class="tag lbl is-medium is-mint sharp-border">
             Certificate Template
           </span>
         </div>
-      </div>
 
-      <div class="card-content la-card-divider">
-        <div class="content has-text-centered">
-          <a href="" class="is-size-4 la-has-text-mint">Choose Photo</a>
-          <p class="la-has-text-mint">--- or ---</p>
-          <input type="text" class="input is-size-7 la-textbox la-is-mint" placeholder="Paste image URL here">
+        <div class="upperright">
+          <button data-type-to-remove="img" data-card-img-id="template-thumb" class="delete is-medium remove-content"></button>
         </div>
-        <!-- div.content for spacing; perhaps search for other ways and exclude this from code -->
-        <div class="content"></div>
+
+      </div>
+      <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+      <div class="card-content top-border-is-1 border-is-mint">
+        <div class="content has-text-centered">
+          <label for="upload-template" class="is-size-4 has-text-dark upload-template">Choose Photo</label>
+          <input id="upload-template" data-card-img-id="template-thumb" type="file" name="photo" accept="image/png, image/jpeg">
+          <p class="has-text-dark">--- or ---</p>
+          <div class="paste-content field columns is-centered has-addons input-link">
+            <div class="control">
+              <input type="text" data-card-img-id="template-thumb" id="paste-template" class="input is-size-7 is-dark" placeholder="Paste image URL here">
+            </div>
+            <div class="control">
+              <button class="button is-reverse-mint is-small"><i class="fa fa-check"></i></button>
+            </div>
+          </div>
+        </div>
       </div>
 
     </div>
+
     <div class="has-text-weight-normal">
-      <span class="tag is-medium la-is-mint">
-        <a href="" class="la-has-text-white">POSITION PLACEHOLDER</a>
-      </span>
+        <a id="btn_placeholder" data-modal-id="placeholder"><span class="tag is-medium is-dark is-mint-hover sharp-border">
+            POSITION PLACEHOLDER
+        </span></a>
     </div>
+    <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
   </div>
 
 
   <div class="column is-4">
     <!-- names-card -->
-    <div class="card is-overlay la-relative la-card-border-3">
-      <div class="card-image">
+    <div id="names-card" class="card main-card border-is-mint">
+
+      <!-- TODO: alert leaving the site will reset content uploads -->
+      <div id="certificate-thumb" class="card-image drop-zone" ondrop="dropHandler(event, this);" ondragover="dragOverHandler(event);">
+      <!-- = = = = = = = = = IMAGE SECTION = = = = = = = = = = = = -->
         <figure class="image is-3by2">
-          <img src="{% static 'certgen/certificate_template_2.png' %}" alt="With Names">
+          <img data-modal-id="certificate-modal" data-card-img-id="certificate-thumb" class="drop" src="" alt="Certificate">
+          <canvas id="certificate-preview" class="is-hidden border-is-dark border-is-3" width="480" height="320"><p>none</p></canvas>
+          <div class="drop la-active" href="">
+            <div class="dropbox is-mint center has-text-centered">
+              Drop file/s here
+              <!-- TODO: toast when file is successfully uploaded or dropped -->
+              <!-- TODO: additional toast for successful upload saying: "you can upload additional files or type more names to include in the list" -->
+            </div>
+          </div>
         </figure>
-        <div class="has-text-weight-normal la-absolute-upperleft">
-          <span class="tag is-medium has-text-white la-is-mint">
-            File containing Names
+
+        <div class="has-text-weight-normal upperleft">
+          <span class="tag lbl is-medium is-mint sharp-border">
+            File Containing Names
           </span>
         </div>
-      </div>
 
-      <div class="card-content la-card-divider">
-        <div class="content has-text-centered">
-          <a href="" class="is-size-4 la-has-text-mint">Choose File</a>
-          <p class="la-has-text-mint">--- or ---</p>
-          <input type="text" class="input is-size-7 la-textbox la-is-mint" placeholder="Paste names here">
+        <input id="names-counter" class="is-hidden" type="number" value="0">
+        <div id="dropdown-names" class="dropdown is-hidden is-hoverable upperright">
+          <!-- IDEA: add search bar -->
+          <div class="dropdown-trigger">
+            <a>
+              <span class="tag is-medium is-dark is-mint-hover sharp-border" aria-haspopup="true" aria-controls="dropdown-menu4">
+                <span>Uploaded Names</span>
+                <span class="icon is-small">
+                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                </span>
+              </span>
+            </a>
+          </div>
+          {% verbatim %}
+          <template id="dropdown-item-template">
+            <div class="dropdown-item is-dark">
+                <button data-type-to-remove="name" class="delete is-small remove-content"></button>&nbsp;
+                <span class="is-size-6">{{name}}</span> <!-- IDEA: make name item a button, when clicked it runs generatePreview({name_of_button}) -->
+            </div>
+          </template>
+          {% endverbatim %}
+          <div class="dropdown-menu is-dark" role="menu">
+            <div id="dropdown-name-items" class="dropdown-content is-dark"></div>
+          </div>
         </div>
-        <!-- div.content for spacing; perhaps search for other ways and exclude this from code -->
-        <div class="content"></div>
+      </div>
+      <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
+      <div class="card-content top-border-is-1 border-is-mint">
+        <div class="content has-text-centered">
+          <label for="upload-namesfile" class="is-size-4 has-text-dark upload-template">Choose Spreadsheet File/s</label>
+          <input type="file" name="namesfile" id="upload-namesfile" accept=".xlsx, .json, .csv" multiple>
+
+          <p class="has-text-dark">--- or ---</p>
+          <div class="paste-content field columns is-centered has-addons">
+            <div class="control">
+              <input id="paste-names" type="text" data-card-img-id="template-thumb" class="input is-size-7 is-dark" placeholder="Paste comma-separated names here">
+            </div>
+            <div class="control">
+              <!-- TODO: add jquery to change button icon to loading when generating preview certificate -->
+              <button class="button is-reverse-mint is-small"><i class="fa fa-check"></i></button>
+            </div>
+          </div>
+        </div>
       </div>
 
     </div>
     <div class="has-text-weight-normal is-pulled-right">
-      <span class="tag is-medium la-is-mint">
-        <a href="" class="la-has-text-white">GENERATE</a>
-      </span>
+        <a id="generate" class="is-hidden"><span class="tag is-medium is-dark is-mint-hover sharp-border">
+            GENERATE
+        </span></a>
     </div>
-
+  <!-- = = = = = = = = = = = = = = = = = = = = = = = = = = = = = -->
   </div>
-  <div class="column"></div>
+
+  <div class="column">
+  </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.3/jszip.min.js"></script> -->
+<!-- <script>
+  let preview_name;
+  console.log(preview_name);
+</script> -->
+<script src="{% static 'certgen/js/jszip.min.js' %}"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.3/xlsx.js"></script> -->
+<script src="{% static 'certgen/js/xlsx.js' %}"></script>
+<script src="{% static 'certgen/js/certgen_fix.js' %}"></script>
+<script src="{% static 'certgen/js/certgen_functions.js' %}"></script>
+<script src="{% static 'certgen/js/certgen.js' %}"></script>
+<script src="{% static 'certgen/js/slider.js' %}"></script>
 {% endblock %}

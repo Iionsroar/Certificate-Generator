@@ -27,6 +27,10 @@ div.is-dark {
     background-color: var(--green) !important;
     color: var(--white) !important;
 }
+.is-dark-hover:hover {
+    background-color: var(--black) !important;
+    color: var(--green) !important;
+}
 .is-reverse-mint {
     background-color: var(--white) !important;
     border-color: var(--green) !important;

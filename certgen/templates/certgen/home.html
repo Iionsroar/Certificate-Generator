@@ -8,6 +8,7 @@
 {% endblock %}
 
 {% block content %}
+<!-- TODO: new canvas, the size of the template image, for downloading high quality certificates <canvas></canvas> -->
 <div id="certificate-modal" class="modal">
   <div data-modal-id="certificate-modal" class="modal-background"></div>
   <div class="modal-content">
@@ -33,6 +34,11 @@
             <label for="v-slider-placeholder">Vertical: </label><input type="range" name="v-slider-placeholder" id="v-slider-placeholder" class="slider" min="1" max="100" value="62">
             <label for="h-slider-placeholder">Horizontal: </label><input type="range" name="h-slider-placeholder" id="h-slider-placeholder" class="slider" min="1" max="100" value="50">
           </div>
+        </div>
+        <br>
+        <div class="columns is-centered">
+          <a class="button is-mint is-dark-hover">Apply changes</a>
+          <a class="button is-reverse-mint">Cancel</a>
         </div>
       </div>
 

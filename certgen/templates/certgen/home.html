@@ -17,9 +17,10 @@
   <button data-modal-id="certificate-modal" class="modal-close is-large" aria-label="close"></button>
 </div>
 
-<div id="placeholder" class="modal">
+
+<div id="edit-certificate" class="modal">
   <!-- TODO, DOING -->
-  <div data-modal-id="certificate-modal" class="modal-background"></div>
+  <div data-modal-id="edit-certificate" class="modal-background"></div>
   <div class="modal-content">
     <div class="card">
       <div class="card-image is-relative">
@@ -33,18 +34,44 @@
           <div>
             <label for="v-slider-placeholder">Vertical: </label><input type="range" name="v-slider-placeholder" id="v-slider-placeholder" class="slider" min="1" max="100" value="62">
             <label for="h-slider-placeholder">Horizontal: </label><input type="range" name="h-slider-placeholder" id="h-slider-placeholder" class="slider" min="1" max="100" value="50">
+
+            <br><label for="text-align">Select Name Alignment: </label>
+            <div id="text-align-buttons" class="buttons has-addons">
+              <!-- Search bulma docs, remove control and field classes if unnecessary -->
+              <button class="button">Start</button>
+              <button class="button is-mint is-selected">Center</button>
+              <button class="button">End</button>
+            </div>
           </div>
         </div>
         <br>
         <div class="columns is-centered">
-          <a class="button is-mint is-dark-hover">Apply changes</a>
-          <a class="button is-reverse-mint">Cancel</a>
+          <a id="apply-edit" class="button is-mint is-dark-hover">Apply changes</a>
+          <a id="cancel-edit" class="button is-reverse-mint cancel-edit">Cancel</a>
         </div>
       </div>
 
     </div>
   </div>
-  <button data-modal-id="placeholder" class="modal-close is-large" aria-label="close"></button>
+  <button data-modal-id="edit-certificate" class="modal-close is-large" aria-label="close"></button>
+</div>
+
+<div id="prompt-discard" class="modal">
+  <div data-modal-id="prompt-discard" class="modal-background"></div>
+  <div class="modal-content columns is-centered">
+    <article class="message half-width">
+      <div class="message-header">
+        <p>Discard changes?</p>
+      </div>
+      <div class="message-body">
+        <div class = "columns is-centered">
+          <a class="button is-mint is-dark-hover confirm-yes">Yes</a>
+          <a class="button is-reverse-mint confirm-cancel">Cancel</a>
+        </div>
+      </div>
+    </article>
+  </div>
+  <button data-modal-id="prompt-discard" class="modal closes is-large" aria-label="close"></button>
 </div>
 
 <div class="columns is-9 is-variable">
@@ -95,7 +122,7 @@
     </div>
 
     <div class="has-text-weight-normal">
-        <a id="btn_placeholder" data-modal-id="placeholder"><span class="tag is-medium is-dark is-mint-hover sharp-border">
+        <a id="btn-placeholder" class="is-hidden" data-modal-id="edit-certificate"><span class="tag is-medium is-dark is-mint-hover sharp-border">
             POSITION PLACEHOLDER
         </span></a>
     </div>
@@ -199,5 +226,5 @@
 <script src="{% static 'certgen/js/certgen_fix.js' %}"></script>
 <script src="{% static 'certgen/js/certgen_functions.js' %}"></script>
 <script src="{% static 'certgen/js/certgen.js' %}"></script>
-<script src="{% static 'certgen/js/slider.js' %}"></script>
+<script src="{% static 'certgen/js/edit-certificate.js' %}"></script>
 {% endblock %}

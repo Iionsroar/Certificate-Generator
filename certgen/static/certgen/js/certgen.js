@@ -2,6 +2,11 @@ let names = [];
 let $card1 = $('.column .is-4 .card').eq(0);
 let $card2 = $('.column .is-4 .card').eq(1);
 
+window.certprev_h_val = 50;
+window.certprev_v_val = 62.5;
+window.text_align = 'center';
+window.font = 'serif'; // merriweather
+
 $(function() {
     // previewing images using modal
     $('figure img').click(function() {
@@ -13,14 +18,25 @@ $(function() {
     });
 
     // positioning names/ placeholder using modal
-    $('#btn_placeholder').click(function() {
+    $('#btn-placeholder').click(function() {
         let modal_id = $(this).attr('data-modal-id');
         $('#'+modal_id).addClass('is-active');
+        generatePreview(window.preview_name, hPos=window.certprev_h_val, vPos=window.certprev_v_val);
     });
 
-    $('.modal-close, .modal-background').click(function() {
-        let modal_id = $(this).attr('data-modal-id');
-        $('#'+modal_id).removeClass('is-active');
+    $('.modal-close, .modal-background, .confirm-cancel, .confirm-yes, .cancel-edit').click(function() {
+        let $modal = $(this).closest('.modal');
+        if ($modal.attr('id') == 'edit-certificate' || $(this).hasClass('cancel-edit')) {
+            let edits_made = false; // TODO: add function for detecting changes in certificate defaults
+            if (edits_made) {
+                $('#prompt-discard').addClass('is-active');
+            } else {
+                $modal.removeClass('is-active')
+            };
+        } else {
+            if ($(this).hasClass('confirm-yes')) $modal.prev().removeClass('is-active');
+            $modal.removeClass('is-active');
+        };
     });
 
     // removing upperleft tags when hovering over preview thumbnails
@@ -79,7 +95,7 @@ $(function() {
 
             $item.remove();
             if (names.length) {
-                generatePreview(names[0])
+                generatePreview(window.preview_name, hPos=window.certprev_h_val, vPos=window.certprev_v_val, textAlign=window.text_align);
             } else {
                 $card.find('.tag.lbl').show();
             };
@@ -99,7 +115,9 @@ $(function() {
             switchContentState($(this));
         };
 
-        if ($card1.hasClass('border-is-dark') && $card2.hasClass('border-is-dark')) generatePreview(window.preview_name);
+        if ($card1.hasClass('border-is-dark') && $card2.hasClass('border-is-dark')) {
+            generatePreview(window.preview_name, hPos=window.certprev_h_val, vPos=window.certprev_v_val);
+        };
     });
     // img error handler
     $('#template-thumb img.drop').on('error', function() {
@@ -154,7 +172,7 @@ $(function() {
     $paste_names.change(function() {
         let names = $(this).val().match(/(\w[a-zA-Z .]*\w?[.]?)/g);
         addNames(names);
-        generatePreview(window.preview_name);
+        generatePreview(window.preview_name, hPos=window.certprev_h_val, vPos=window.certprev_v_val);
 
         $(this).val('added!');
         setTimeout(function() {
@@ -178,7 +196,8 @@ $(function() {
     // previewing names from dropdown list
     $('.card').delegate('.dropdown-item span', 'click',  function() {
         let name = $(this).html();
-        generatePreview(name);
+        window.preview_name = name;
+        generatePreview(window.preview_name, hPos=window.certprev_h_val, vPos=window.certprev_v_val, textAlign=window.text_align);
     });
 
     // = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -191,10 +210,12 @@ $(function() {
             if (mutation.type === 'attributes') {
                 if ($card1.hasClass('border-is-dark') && $card2.hasClass('border-is-dark')) {
                     $('#generate').removeClass('is-hidden');
-                    $('#placeholder').addClass('is-active');
+                    $('#btn-placeholder').removeClass('is-hidden');
+                    $('#edit-certificate.modal').addClass('is-active');
                     // IDEA: also add a circular edit button at lower right that allows user to edit the font and vertical placeholder
                 } else {
                     $('#generate').addClass('is-hidden');
+                    $('#btn-placeholder').addClass('is-hidden');
                 };
             };
         };

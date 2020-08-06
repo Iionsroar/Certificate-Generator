@@ -63,6 +63,9 @@ div.center {
     border-style: solid;
     border-width: 3px;
 }
+.half-width {
+    width: 50%;
+}
 img.drop {
     cursor: pointer;
 }
@@ -162,4 +165,7 @@ label.upload-template, label.upload-namesfile {
 /*.slidecontainer span {
     display: inline !important;
 }*/
-
+/* =============================================*/
+#text-align-buttons {
+    display: inline-block;
+}

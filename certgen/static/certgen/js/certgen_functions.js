@@ -1,8 +1,13 @@
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-function generatePreview(name, imgSelector="#certificate-thumb img", vPos=200, hPos=240, font="serif") {
+// function generatePreview(name, hPos=240, vPos=200, textAlign='center', imgSelector="#certificate-thumb img", font="serif") {
+function generatePreview(name, hPos=50, vPos=62.5, textAlign='center', imgSelector="#certificate-thumb img", font="serif") {
     // run only when card1 is active
     let $card1 = $('.column .is-4 .card').eq(0);
     if ($card1.hasClass('border-is-dark')) {
+        let $canvas_preview = $('canvas#certificate-preview');
+        hPos = hPos / 100 * $canvas_preview.attr('width');
+        vPos = vPos / 100 * $canvas_preview.attr('height');
+
         // IDEA: code that scans image using js img library for the thickest space, suitable for adding lines
         let ctx = $('#certificate-preview')[0].getContext('2d');
         let template = new Image();
@@ -13,15 +18,30 @@ function generatePreview(name, imgSelector="#certificate-thumb img", vPos=200, h
         ctx.drawImage(template, 0, 0, 480, 320);
 
         ctx.font = 'bold 18px Merriweather';
-        ctx.textAlign = 'center';
+        ctx.textAlign = textAlign;
         ctx.fillText(name, hPos, vPos);
 
         $(imgSelector).attr('src', $('canvas')[0].toDataURL('image/png', 1)).show();
+        // apply changes to edit modal
         $("img#edit_preview").attr('src', $('canvas')[0].toDataURL('image/png', 1));
         $('#certificate-thumb .dropbox').hide();
     };
 
 };
+
+// TODO
+function editsMade() {
+    let editsMade = false
+    let vars = {certprev_h_val: 240, certprev_v_val: 200, text_align: 'center', font: 'serif'};
+    for (let v in vars) {
+        console.log('w ' + window[v]);
+        console.log('e' + vars[v]);
+        if (! (window[v] == vars[v])) {
+            editsMade = true;
+        }
+    }
+    return editsMade;
+}
 
 function addImg(imgObj, src) {
     let $imgObj = imgObj;
@@ -69,7 +89,7 @@ function addNames(file) {
                     pushName(name['t']);
                 };
             };
-            generatePreview(window.preview_name);
+            generatePreview(window.preview_name, hPos=window.certprev_h_val, vPos=window.certprev_v_val);
         };
         reader.readAsArrayBuffer(file);
     };
@@ -93,7 +113,6 @@ function dropHandler(ev, target) {
                     file = dropItem;
                 };
                 addNames(file);
-                // generatePreview(window.preview_name);
             };
         };
 

@@ -45,4 +45,3 @@ $(function() {
         // TODO: selected button for text_align;
     });
 });
-

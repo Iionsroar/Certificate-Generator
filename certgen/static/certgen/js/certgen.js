@@ -5,6 +5,8 @@ let $card2 = $('.column .is-4 .card').eq(1);
 window.certprev_h_val = 50;
 window.certprev_v_val = 62.5;
 window.text_align = 'center';
+window.font_style = 'bold';
+window.font_size = '18px';
 window.font = 'serif'; // merriweather
 
 $(function() {
@@ -18,10 +20,10 @@ $(function() {
     });
 
     // positioning names/ placeholder using modal
-    $('#btn-placeholder').click(function() {
+    $('#btn-edit-cert').click(function() {
         let modal_id = $(this).attr('data-modal-id');
         $('#'+modal_id).addClass('is-active');
-        generatePreview(window.preview_name, hPos=window.certprev_h_val, vPos=window.certprev_v_val);
+        generatePreview(window.preview_name, hPos=window.certprev_h_val, vPos=window.certprev_v_val, textAlign=window.text_align);
     });
 
     $('.modal-close, .modal-background, .confirm-cancel, .confirm-yes, .cancel-edit').click(function() {
@@ -210,12 +212,12 @@ $(function() {
             if (mutation.type === 'attributes') {
                 if ($card1.hasClass('border-is-dark') && $card2.hasClass('border-is-dark')) {
                     $('#generate').removeClass('is-hidden');
-                    $('#btn-placeholder').removeClass('is-hidden');
+                    $('#btn-edit-cert').removeClass('is-hidden');
                     $('#edit-certificate.modal').addClass('is-active');
                     // IDEA: also add a circular edit button at lower right that allows user to edit the font and vertical placeholder
                 } else {
                     $('#generate').addClass('is-hidden');
-                    $('#btn-placeholder').addClass('is-hidden');
+                    $('#btn-edit-cert').addClass('is-hidden');
                 };
             };
         };

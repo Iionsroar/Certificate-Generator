@@ -1,5 +1,5 @@
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-// function generatePreview(name, hPos=240, vPos=200, textAlign='center', imgSelector="#certificate-thumb img", font="serif") {
+// TODO: TRY GEN PREVIEW sfunction generatePreview(name, imgSelector="#certificate-thumb img", hPos=50, vPos=62.5, fontSize='18px', font="serif", fontStyle='bold', textAlign='center') {
 function generatePreview(name, hPos=50, vPos=62.5, textAlign='center', imgSelector="#certificate-thumb img", font="serif") {
     // run only when card1 is active
     let $card1 = $('.column .is-4 .card').eq(0);

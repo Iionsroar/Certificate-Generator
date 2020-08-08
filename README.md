@@ -29,7 +29,7 @@ Web application for generating certificates from a list of names (file formats: 
 
 ~~- window h and v values --> change to percentage, to be applicable for final generation~~
 
-#### I. Generate Certifi`cates
+#### I. Generate Certificates
 - #generate.button click
     --> create function for generating high quality certificates, using the settings in edit certificate
 

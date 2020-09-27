@@ -1,7 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.conf import settings
-from PIL import Image
 import os
 
 # Create your views here.

@@ -6,8 +6,8 @@ window.certprev_h_val = 50;
 window.certprev_v_val = 62.5;
 window.text_align = 'center';
 window.font_style = 'bold';
-window.font_size = '18px';
-window.font = 'serif'; // merriweather
+window.font_size = 18;
+window.font = 'serif';
 
 $(function() {
     // previewing images using modal

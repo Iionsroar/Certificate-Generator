@@ -166,6 +166,6 @@ label.upload-template, label.upload-namesfile {
     display: inline !important;
 }*/
 /* =============================================*/
-#text-align-buttons {
+.inline-block {
     display: inline-block;
 }

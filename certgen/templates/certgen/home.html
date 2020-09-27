@@ -34,20 +34,57 @@
           <div>
             <label for="v-slider-placeholder">Vertical: </label><input type="range" name="v-slider-placeholder" id="v-slider-placeholder" class="slider" min="1" max="100" value="62">
             <label for="h-slider-placeholder">Horizontal: </label><input type="range" name="h-slider-placeholder" id="h-slider-placeholder" class="slider" min="1" max="100" value="50">
+            <!-- TODO: update gencertprev settings for these below -->
+            <!-- <label for="font-slider">Font Size: </label><input type="range" name="font-slider" id="font-slider" class="slider" min="1" max="100" value="18"> -->
 
-            <br><label for="text-align">Select Name Alignment: </label>
-            <div id="text-align-buttons" class="buttons has-addons">
-              <!-- Search bulma docs, remove control and field classes if unnecessary -->
-              <button class="button">Start</button>
-              <button class="button is-mint is-selected">Center</button>
-              <button class="button">End</button>
+            <br><label for="dropdown-font-f">Font Family:</label>
+            <div id="dropdown-font-f" class="dropdown is-hoverable">
+              <div class="dropdown-trigger">
+                <a>
+                  <span class="tag is-medium is-dark is-mint-hover sharp-border" aria-haspopup="true" aria-controls="dropdown-menu4">
+                    <span class='selected-font'>Merriweather</span>
+                    <span class="icon is-small">
+                      <i class="fas fa-angle-down" aria-hidden="true"></i>
+                    </span>
+                  </span>
+                </a>
+              </div>
+              <div class="dropdown-menu is-dark" role="menu">
+                <div class="dropdown-content is-dark">
+                  <div class="dropdown-item is-dark">
+                    <span class="is-size-6">Merriweather</span>
+                  </div>
+                  <div class="dropdown-item is-dark">
+                    <span class="is-size-6">Serif</span>
+                  </div>
+                  <div class="dropdown-item is-dark">
+                    <span class="is-size-6">Times New Roman</span>
+                  </div>
+                  <!-- TODO: search commonly used font families -->
+                  <!-- IDEA: capability to just type them OR feedback the user that font is not available -->
+                </div>
+              </div>
+            </div>
+
+            <br><br><label for="text-align">Font Style: </label>
+            <div id="" class="buttons has-addons inline-block">
+              <button class="button is-small">Italic</button>
+              <button class="button is-small">None</button>
+              <button class="button is-small is-dark is-selected">Bold</button>
+            </div>
+
+            <br><label for="text-align">Name Alignment: </label>
+            <div id="text-align-buttons" class="buttons has-addons inline-block">
+              <button class="button is-small">Start</button>
+              <button class="button is-small is-dark is-selected">Center</button>
+              <button class="button is-small">End</button>
             </div>
           </div>
         </div>
         <br>
         <div class="columns is-centered">
-          <a id="apply-edit" class="button is-mint is-dark-hover">Apply changes</a>
-          <a id="cancel-edit" class="button is-reverse-mint cancel-edit">Cancel</a>
+          <a id="apply-edit" class="button is-mint is-dark-hover sharp-border">Apply changes</a>
+          <a id="cancel-edit" class="button is-reverse-mint cancel-edit sharp-border">Cancel</a>
         </div>
       </div>
 
@@ -122,7 +159,8 @@
     </div>
 
     <div class="has-text-weight-normal">
-        <a id="btn-edit-cert" class="is-hidden" data-modal-id="edit-certificate"><span class="tag is-medium is-dark is-mint-hover sharp-border">
+        <!-- <a id="btn-edit-cert" class="is-hidden" data-modal-id="edit-certificate"><span class="tag is-medium is-dark is-mint-hover sharp-border"> -->
+        <a id="btn-edit-cert" class="" data-modal-id="edit-certificate"><span class="tag is-medium is-dark is-mint-hover sharp-border">
             EDIT CERTIFICATE
         </span></a>
     </div>

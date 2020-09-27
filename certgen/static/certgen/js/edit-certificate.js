@@ -18,8 +18,8 @@ v_slider.oninput = function() {
 
 $(function() {
     $('#text-align-buttons .button').on('click', function() {
-        $(this).addClass('is-mint is-selected');
-        $(this).siblings().removeClass('is-mint is-selected');
+        $(this).addClass('is-dark is-selected');
+        $(this).siblings().removeClass('is-dark is-selected');
         window.temp_align = $(this).html().toLowerCase();
         generatePreview(window.preview_name, hPos=window.temp_h_val, vPos=window.temp_v_val, textAlign=window.temp_align, imgSelector="img#edit_preview");
     });
@@ -36,11 +36,11 @@ $(function() {
         // h_slider.val = window.certprev_h_val;
         $('#h-slider-placeholder').val(window.certprev_h_val);
         $('#v-slider-placeholder').val(window.certprev_v_val);
-        $('#text-align-buttons').find('.is-selected').removeClass('is-mint is-selected');
+        $('#text-align-buttons').find('.is-selected').removeClass('is-dark is-selected');
 
         // TODO, DEBUGGING: window.text_align has bugs wtf
         let align = window.text_align[0].toUpperCase() + window.text_align.slice(1);
-        $('#text-align-buttons button:contains(' + align + ')').addClass('is-mint is-selected');
+        $('#text-align-buttons button:contains(' + align + ')').addClass('is-dark is-selected');
         // v_slider.val = window.certprev_v_val;
         // TODO: selected button for text_align;
     });

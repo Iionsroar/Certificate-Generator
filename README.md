@@ -1,3 +1,5 @@
+certificate_generator > settings.py
+
 # Certificate Generator
 Web application for generating certificates from a list of names (file formats: .xlsx .csv .tsv .json)
 
@@ -16,7 +18,6 @@ Web application for generating certificates from a list of names (file formats: 
 - '#edit-certificate' ~~--> add to generatePreview function: option to specify textAlign of canvas text (reference: https://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_canvas_textalign)~~
                       ~~--> edit button group, see bulma docs~~
 
-~~- CURRENTLY: EDITS FUNCTION --> change exact pixel values (for windows height and width) to percentage~~
 
 - '#edit-certificate.modal': #apply-changes.button
     --> run generatePreview for both previews using window.width_and_height_of_template
@@ -29,6 +30,10 @@ Web application for generating certificates from a list of names (file formats: 
 
 ~~- window h and v values --> change to percentage, to be applicable for final generation~~
 
+- home.html: add label+input for font-slider, add dropdown font selection, add button group for fontstyle
+- certgen_functions.js: add parameters, use parameters in canvas drawing, visualize how the function is called across files
+- all: update use of generatePreview with correct parameters
+
 #### I. Generate Certificates
 - #generate.button click
     --> create function for generating high quality certificates, using the settings in edit certificate
@@ -38,3 +43,31 @@ Web application for generating certificates from a list of names (file formats: 
 ACTIVE COMMENT - currently editing
 
 
+
+DATA STRUCTURE
+THESIS CLASS
+- title property
+- SN list property
+- adviser property
+- course list property
+
+theses = {'title': {, 'SNs': , 'adviser': , 'courses': }, }
+
+
+
+- column 1, for identifying rows with student records
+    get row numbers to inspect
+
+- column 3, for the SNs
+
+- column 5, for the course
+
+- column 6, for the adviser
+
+- column 7, for the title
+
+
+1. iterate through row numbers:
+    a. theses.setdefault(GETTitle, {'SNs': [], 'adviser': GETAdviser, 'courses': []})
+    b. append SN to title
+    c. append course to title

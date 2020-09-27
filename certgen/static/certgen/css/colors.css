@@ -11,7 +11,7 @@ input.is-dark {
 span.is-dark, input.is-dark::placeholder {
     color: var(--green) !important;
 }
-div.is-dark {
+div.is-dark, button.is-dark {
     background-color: var(--black) !important;
     color: var(--green) !important;
 }

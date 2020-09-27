@@ -159,12 +159,25 @@
           <p class="has-text-dark">--- or ---</p>
           <div class="paste-content field columns is-centered has-addons">
             <div class="control">
+              <!--HERE-->
               <input id="paste-names" type="text" data-card-img-id="template-thumb" class="input is-size-7 is-dark" placeholder="Paste comma-separated names here">
-            </div>
+
+            <!--ChooseFonts-->   
+            <select id="selecFontFamily" name="selectFontFamily" onchange="updateInputFont();">
+            <option> Serif </option>
+            <option> Arial Black </option>
+            <option> Sans-Serif </option>                                  
+            <option> Tahoma </option>
+            <option> Courier New </option>
+            <option> Verdana </option>
+            <option> Lucida Sans Unicode </option>                               
+            </select>
+            
+            </div>             
             <div class="control">
               <!-- TODO: add jquery to change button icon to loading when generating preview certificate -->
               <button class="button is-reverse-mint is-small"><i class="fa fa-check"></i></button>
-            </div>
+            </div>           
           </div>
         </div>
       </div>

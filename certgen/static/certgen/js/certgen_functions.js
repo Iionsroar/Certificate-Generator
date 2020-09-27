@@ -1,5 +1,5 @@
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-function generatePreview(name, imgSelector="#certificate-thumb img", vPos=200, font="serif") {
+function generatePreview(name, imgSelector="#certificate-thumb img", vPos=200, font='serif') {
     // TODO: DEBUGGING
     // run only when card1 is active
     let $card1 = $('.column .is-4 .card').eq(0);
@@ -13,15 +13,27 @@ function generatePreview(name, imgSelector="#certificate-thumb img", vPos=200, f
         ctx.clearRect(0, 0, 480, 320);
         ctx.drawImage(template, 0, 0, 480, 320);
 
-        ctx.font = 'bold 18px Merriweather';
+        ctx.font = 'bold 18px Courier New'; //DEFAULT
         ctx.textAlign = 'center';
         ctx.fillText(name, 240, vPos);
 
         $(imgSelector).attr('src', $('canvas')[0].toDataURL('image/png', 1)).show();
         $('#certificate-thumb .dropbox').hide();
     };
-
 };
+
+function updateInputFont() {
+        let ctx = $('#certificate-preview')[0].getContext('2d');
+        var selector = document.getElementById('selecFontFamily');
+        var family = selector.options[selector.selectedIndex].value;
+        window.font = family;
+        //alert("THIS FUNCTION IS RUNNING");   
+        ctx.font = 'bold 20px' + window.font;
+        generatePreview(name, font);
+        console.log(window.font + ctx.font +"THIS IS IT!");
+    
+};
+
 
 function addImg(imgObj, src) {
     let $imgObj = imgObj;
@@ -115,8 +127,7 @@ function dropHandler(ev, target) {
             let $dropPreview = $('#'+target.id + ' figure img');
             addImg($dropPreview, URL.createObjectURL(file));
         }
-    };
-
+    }; 
 };
 
 function dragOverHandler(ev) {

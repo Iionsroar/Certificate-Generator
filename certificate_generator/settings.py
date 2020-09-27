@@ -65,8 +65,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'certgen.apps.CertgenConfig',
-    'tinymce',
-    'rest_framework',
 ]
 
 MIDDLEWARE = [

@@ -1,5 +1,9 @@
 let names = [];
 
+window.font_style = 'bold';
+window.font_size = 18;
+window.font = 'serif';
+
 $(function() {
     // previewing images using modal
     $('figure img').click(function() {

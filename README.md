@@ -23,10 +23,13 @@ Web application for generating certificates from a list of names (file formats: 
 - '#edit-certificate.modal': #apply-changes.button
     --> run generatePreview for both previews using window.width_and_height_of_template
     --> open modal  -> make changes, save   -> store current h and v values to window.edit_h_val and etc.
-                    -> make changes, cancel -> revert to previous state, the preview and check if the other one also needs -> if previous state is from default (generatePreview), run generatePreview for both edit-cert modal AND card2 w/ the function only differing in the imgSelector parameter
-                                                                        ->aasaksjaksaa if previous state is from saved (if global variables for edit_v_and_h are present), run generatePreview for both preview using the stored window.edit-h-and-v variables to generate previews, each w/ diff imgSelector param
-
+                    -> make changes, cancel -> revert to previous state, the preview and check if the other one also needs -> if previous state is from default (generatePreview), run generatePreview for both edit-cert modal AND card2 w/ the function only differing in the imgSelector parameter                                               ->aasaksjaksaa if previous state is from saved (if global variables for edit_v_and_h are present), run generatePreview for both preview using the stored window.edit-h-and-v variables to generate previews, each w/ diff imgSele
 
 #### II. Generate Certificates
 1. Upon #generate.button click: 
     --> call function for generating high quality certificates, using the global variables for the text styling
+
+
+#### III. New (Not Pushed)
+1. Bugs when reading csv and xlsx files
+2. When first set of names is added,change file upload text to: Add another file etc.

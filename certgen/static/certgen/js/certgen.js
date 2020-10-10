@@ -7,7 +7,7 @@ window.certprev_v_val = 62.5;
 window.text_align = 'center';
 window.font_style = 'bold';
 window.font_size = 18;
-window.font = 'serif';
+window.font = 'Merriweather';
 
 $(function() {
     // previewing images using modal
@@ -196,7 +196,7 @@ $(function() {
     });
 
     // previewing names from dropdown list
-    $('.card').delegate('.dropdown-item span', 'click',  function() {
+    $('.card').delegate('#dropdown-names .dropdown-item span', 'click',  function() {
         let name = $(this).html();
         window.preview_name = name;
         generatePreview(window.preview_name, hPos=window.certprev_h_val, vPos=window.certprev_v_val, textAlign=window.text_align);

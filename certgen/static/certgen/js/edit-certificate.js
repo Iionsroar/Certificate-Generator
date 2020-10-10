@@ -17,6 +17,10 @@ v_slider.oninput = function() {
 };
 
 $(function() {
+    $('#dropdown-font-f span').on('click', function() {
+        generatePreview(window.preview_name, hPos=window.temp_h_val, vPos=window.temp_v_val, textAlign=window.temp_align, imgSelector="img#edit_preview", font=$(this).html());
+    });
+
     $('#text-align-buttons .button').on('click', function() {
         $(this).addClass('is-dark is-selected');
         $(this).siblings().removeClass('is-dark is-selected');

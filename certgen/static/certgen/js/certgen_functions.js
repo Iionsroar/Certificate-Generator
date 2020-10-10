@@ -1,6 +1,6 @@
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 // TODO: TRY GEN PREVIEW sfunction generatePreview(name, imgSelector="#certificate-thumb img", hPos=50, vPos=62.5, fontSize='18px', font="serif", fontStyle='bold', textAlign='center') {
-function generatePreview(name, hPos=50, vPos=62.5, textAlign='center', imgSelector="#certificate-thumb img", font="serif") {
+function generatePreview(name, hPos=50, vPos=62.5, textAlign='center', imgSelector="#certificate-thumb img", font="Times New Roman") {
     // run only when card1 is active
     let $card1 = $('.column .is-4 .card').eq(0);
     if ($card1.hasClass('border-is-dark')) {
@@ -17,7 +17,7 @@ function generatePreview(name, hPos=50, vPos=62.5, textAlign='center', imgSelect
         ctx.clearRect(0, 0, 480, 320);
         ctx.drawImage(template, 0, 0, 480, 320);
 
-        ctx.font = 'bold 18px Merriweather';
+        ctx.font = 'bold 18px ' + font;
         ctx.textAlign = textAlign;
         ctx.fillText(name, hPos, vPos);
 

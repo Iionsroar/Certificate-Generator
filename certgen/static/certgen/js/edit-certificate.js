@@ -2,9 +2,18 @@ let v_slider = document.getElementById('v-slider-placeholder');
 let h_slider = document.getElementById('h-slider-placeholder');
 let $canvas_preview = $('canvas#certificate-preview');
 
+let colorInput = document.querySelector('#colorPicker');
+
 window.temp_h_val = window.certprev_h_val;
 window.temp_v_val = window.certprev_v_val;
 window.temp_align = window.text_align;
+
+colorInput.addEventListener('input', () =>{
+    let color = colorInput.value;
+    generatePreview(window.preview_name, hPos=window.temp_h_val, vPos=window.temp_v_val, textAlign=window.temp_align, imgSelector="img#edit_preview", fontColor=color);
+    document.body.style.backgroundColor = color; //PANG DEBUG!.....
+    console.log(fontColor);
+});
 
 h_slider.oninput = function() {
     window.temp_h_val = h_slider.value;
@@ -17,6 +26,11 @@ v_slider.oninput = function() {
 };
 
 $(function() {
+    $('#dropdown-font-f span').on('click', function() {
+        generatePreview(window.preview_name, hPos=window.temp_h_val, vPos=window.temp_v_val, textAlign=window.temp_align, imgSelector="img#edit_preview", font=$(this).html());
+        console.log(font);
+    });
+    
     $('#text-align-buttons .button').on('click', function() {
         $(this).addClass('is-dark is-selected');
         $(this).siblings().removeClass('is-dark is-selected');

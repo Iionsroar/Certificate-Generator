@@ -128,11 +128,20 @@ img.drop, .tag, .delete {
     display: inline;
     padding-right: 5px;
 }
+
+#colorPicker {
+    width: 55px;
+    height:30px;
+}
 .dropdown-content {
     overflow-y: auto;
     max-height: 450px;
 }
 .dropdown-item span {
+    cursor: pointer;
+}
+
+.dropdown-item2 span {
     cursor: pointer;
 }
 /* ========= custom file upload ========= */
@@ -158,6 +167,8 @@ label.upload-template, label.upload-namesfile {
     padding-top: 3px;
     padding-bottom: 0px;
 }
+
+
 /* =============================================*/
 .slidecontainer label {
     margin-left: 5px;

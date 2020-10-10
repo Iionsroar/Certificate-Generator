@@ -8,6 +8,7 @@ window.text_align = 'center';
 window.font_style = 'bold';
 window.font_size = 18;
 window.font = 'serif';
+//window.fontColor = '#000000';
 
 $(function() {
     // previewing images using modal

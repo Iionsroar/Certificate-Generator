@@ -7,7 +7,12 @@ window.certprev_v_val = 62.5;
 window.text_align = 'center';
 window.font_style = 'bold';
 window.font_size = 18;
+<<<<<<< HEAD
 window.font = 'Merriweather';
+=======
+window.font = 'serif';
+//window.fontColor = '#000000';
+>>>>>>> ae81d8cc51c0feb182d48fb3104d0039d3c1708a
 
 $(function() {
     // previewing images using modal

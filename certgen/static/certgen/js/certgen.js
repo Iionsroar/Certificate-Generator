@@ -7,8 +7,8 @@ window.certprev_v_val = 62.5;
 window.text_align = 'center';
 window.font_style = 'bold';
 window.font_size = 18;
-window.font = 'serif';
-//window.fontColor = '#000000';
+window.font_family = 'Merriweather';
+window.font_color = '#000000';
 
 $(function() {
     // previewing images using modal

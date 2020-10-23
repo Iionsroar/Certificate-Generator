@@ -35,7 +35,10 @@
             <label for="v-slider-placeholder">Vertical: </label><input type="range" name="v-slider-placeholder" id="v-slider-placeholder" class="slider" min="1" max="100" value="62">
             <label for="h-slider-placeholder">Horizontal: </label><input type="range" name="h-slider-placeholder" id="h-slider-placeholder" class="slider" min="1" max="100" value="50">
             <!-- TODO: update gencertprev settings for these below -->
-            <!-- <label for="font-slider">Font Size: </label><input type="range" name="font-slider" id="font-slider" class="slider" min="1" max="100" value="18"> -->
+
+            <div> <!--Font size slider-->
+              <label for="font-slider">Size: </label><input type="range" name="font-slider" id="font-slider" class="slider" min="5" max="100" value="18"> 
+            </div>
 
             <br><label for="dropdown-font-f">Font Family:</label>
             <div id="dropdown-font-f" class="dropdown is-hoverable">
@@ -49,22 +52,34 @@
                   </span>
                 </a>
               </div>
-              <div class="dropdown-menu is-dark" role="menu">
+              <div id="font-choices" class="dropdown-menu is-dark" role="menu">
                 <div class="dropdown-content is-dark">
                   <div class="dropdown-item2 is-dark">
                     <span class="is-size-6">Merriweather</span>
                   </div>
-                  <div class="dropdown-item2 is-dark">
-                    <span class="is-size-6">Serif</span>
+                  <div id="font-choices" class="dropdown-item2 is-dark">
+                    <span class="is-size-6">Arial</span>
                   </div>
-                  <div class="dropdown-item2 is-dark">
-                    <span class="is-size-6">Verdana</span>
+                  <div id="font-choices" class="dropdown-item2 is-dark">
+                    <span class="is-size-6">Calibri</span>
                   </div>
-                  <div class="dropdown-item2 is-dark">
+                  <div id="font-choices" class="dropdown-item2 is-dark">
+                    <span class="is-size-6">Courier New</span>
+                  </div>
+                  <div id="font-choices" class="dropdown-item2 is-dark">
                     <span class="is-size-6">Monospace</span>
                   </div>
-                  <div class="dropdown-item2 is-dark">
-                    <span class="is-size-6">Courier New</span>
+                  <div id="font-choices" class="dropdown-item2 is-dark">
+                    <span class="is-size-6">Serif</span>
+                  </div>
+                  <div id="font-choices" class="dropdown-item2 is-dark">
+                    <span class="is-size-6">Sans-serif</span>
+                  </div>
+                  <div id="font-choices" class="dropdown-item2 is-dark">
+                    <span class="is-size-6">Times New Roman</span>
+                  </div>
+                  <div id="font-choices" class="dropdown-item2 is-dark">
+                    <span class="is-size-6">Verdana</span>
                   </div>
                   <!-- TODO: search commonly used font families -->
                   <!-- IDEA: capability to just type them OR feedback the user that font is not available -->
@@ -72,7 +87,7 @@
               </div>
             </div>
 
-            <input type="color" id="colorPicker">
+            <input type="color" id="colorPicker"> <!--COLOR PICKERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR!-->
 
             <br><br><label for="text-align">Font Style: </label>
             <div id="" class="buttons has-addons inline-block">

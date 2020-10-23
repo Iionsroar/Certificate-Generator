@@ -130,8 +130,8 @@ img.drop, .tag, .delete {
 }
 
 #colorPicker {
-    width: 55px;
-    height:30px;
+    width: 45px;
+    height:32px;
 }
 .dropdown-content {
     overflow-y: auto;

@@ -3,39 +3,48 @@ let h_slider = document.getElementById('h-slider-placeholder');
 let $canvas_preview = $('canvas#certificate-preview');
 
 let colorInput = document.querySelector('#colorPicker');
+let fontSize_slider = document.getElementById('font-slider');
+let font_family_selected = document.getElementById('font-choices');
 
 window.temp_h_val = window.certprev_h_val;
 window.temp_v_val = window.certprev_v_val;
 window.temp_align = window.text_align;
+window.temp_font_color = window.font_color;
+window.temp_font_size = window.font_size;
+window.temp_font_family = window.font_family;
 
 colorInput.addEventListener('input', () =>{
     let color = colorInput.value;
-    generatePreview(window.preview_name, hPos=window.temp_h_val, vPos=window.temp_v_val, textAlign=window.temp_align, imgSelector="img#edit_preview", fontColor=color);
-    document.body.style.backgroundColor = color; //PANG DEBUG!.....
-    console.log(fontColor);
+    window.temp_font_color = colorInput.value;
+    generatePreview(window.preview_name, hPos=window.temp_h_val, vPos=window.temp_v_val, textAlign=window.text_align, imgSelector="img#edit_preview", font=window.temp_font_family, fontColor=color, fontSize=window.temp_font_size);
 });
 
 h_slider.oninput = function() {
     window.temp_h_val = h_slider.value;
-    generatePreview(window.preview_name, hPos=h_slider.value, vPos=window.temp_v_val, textAlign=window.text_align, imgSelector="img#edit_preview");
+    generatePreview(window.preview_name, hPos=h_slider.value, vPos=window.temp_v_val, textAlign=window.text_align, imgSelector="img#edit_preview", font=window.temp_font_family, fontColor=window.temp_font_color, fontSize=window.temp_font_size);
 };
 
 v_slider.oninput = function() {
     window.temp_v_val = v_slider.value;
-    generatePreview(window.preview_name, hPos=window.temp_h_val, vPos=v_slider.value, textAlign=window.text_align, imgSelector="img#edit_preview");
+    generatePreview(window.preview_name, hPos=window.temp_h_val, vPos=v_slider.value, textAlign=window.text_align, imgSelector="img#edit_preview", font=window.temp_font_family,fontColor=window.temp_font_color, fontSize=window.temp_font_size);
+};
+
+fontSize_slider.oninput = function() {
+    window.temp_font_size = fontSize_slider.value;
+    generatePreview(window.preview_name, hPos=window.temp_h_val, vPos=window.temp_v_val, textAlign=window.text_align, imgSelector="img#edit_preview", font=window.temp_font_family, fontColor=window.temp_font_color, fontSize=fontSize_slider.value);
 };
 
 $(function() {
     $('#dropdown-font-f span').on('click', function() {
-        generatePreview(window.preview_name, hPos=window.temp_h_val, vPos=window.temp_v_val, textAlign=window.temp_align, imgSelector="img#edit_preview", font=$(this).html());
-        console.log(font);
+        window.temp_font_family = $(this).html();
+        generatePreview(window.preview_name, hPos=window.temp_h_val, vPos=window.temp_v_val, textAlign=window.temp_align, imgSelector="img#edit_preview", font=$(this).html(), fontColor=window.temp_font_color, fontSize=window.temp_font_size);
     });
     
     $('#text-align-buttons .button').on('click', function() {
         $(this).addClass('is-dark is-selected');
         $(this).siblings().removeClass('is-dark is-selected');
         window.temp_align = $(this).html().toLowerCase();
-        generatePreview(window.preview_name, hPos=window.temp_h_val, vPos=window.temp_v_val, textAlign=window.temp_align, imgSelector="img#edit_preview");
+        generatePreview(window.preview_name, hPos=window.temp_h_val, vPos=window.temp_v_val, textAlign=$(this).html().toLowerCase(), imgSelector="img#edit_preview", font=window.temp_font_family, fontColor=window.temp_font_color, fontSize=window.temp_font_size);
     });
 
     $('#apply-edit').on('click', function() {

@@ -1,10 +1,7 @@
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 // TODO: TRY GEN PREVIEW sfunction generatePreview(name, imgSelector="#certificate-thumb img", hPos=50, vPos=62.5, fontSize='18px', font="serif", fontStyle='bold', textAlign='center') {
-<<<<<<< HEAD
-function generatePreview(name, hPos=50, vPos=62.5, textAlign='center', imgSelector="#certificate-thumb img", font="Times New Roman") {
-=======
-function generatePreview(name, hPos=50, vPos=62.5, textAlign='center', imgSelector="#certificate-thumb img", font='Merriweather', fontColor='#000000') {
->>>>>>> ae81d8cc51c0feb182d48fb3104d0039d3c1708a
+function generatePreview(name, hPos=50, vPos=62.5, textAlign='center', imgSelector="#certificate-thumb img", font=window.font) {
+// function generatePreview(name, hPos=50, vPos=62.5, textAlign='center', imgSelector="#certificate-thumb img", font='Merriweather', fontColor='#000000') {
     // run only when card1 is active
     let $card1 = $('.column .is-4 .card').eq(0);
     if ($card1.hasClass('border-is-dark')) {
@@ -21,14 +18,9 @@ function generatePreview(name, hPos=50, vPos=62.5, textAlign='center', imgSelect
         ctx.clearRect(0, 0, 480, 320);
         ctx.drawImage(template, 0, 0, 480, 320);
 
-<<<<<<< HEAD
-        ctx.font = 'bold 18px ' + font;
-=======
         ctx.font = 'bold 18px '+ font;
->>>>>>> ae81d8cc51c0feb182d48fb3104d0039d3c1708a
         ctx.textAlign = textAlign;
-        ctx.fillStyle = fontColor; //DOING NOW
-        //console.log(fontColor + "CERT GEN FUNCTION");
+        // ctx.fillStyle = fontColor; //DOING NOW
         ctx.fillText(name, hPos, vPos);
         
 
@@ -72,7 +64,7 @@ function pushName(name) {
 
 function addNames(file) {
     // sheetjs
-    if (! file.type) { // if argument is an array
+    if (typeof file.type == "undefined") { // if argument is an array
         window.preview_name = file[0];
         $.each(file, function(i, f) {
             pushName(file[i]);
@@ -83,26 +75,24 @@ function addNames(file) {
             var data = new Uint8Array(e.target.result);
             var workbook = XLSX.read(data, {type: 'array'});
             let name;
-            if (file.type.endsWith('ms-excel')) {
-                // csv files
-                let is_first = true;
-                for (const [key, value] of Object.entries(workbook.Sheets.Sheet1)) {
-                    name = (value['w']) ? value['w']:value['v'];
+            let is_first = true;
+            for (const [key, value] of Object.entries(workbook.Sheets.Sheet1)) {
+                if(key[0] == '!') {} // skip headers, meta etc.
+                else {
+                    if (file.type == "") { // for csv files
+                        name = value['v'];
+                    } else if (file.type.endsWith('sheet')) { // xlsx files
+                        name = (value['w']) ? value['w']:value['v'];
+                    }
                     if (is_first) window.preview_name = name;
                     pushName(name);
                     is_first = false;
                 }
-            } else if (file.type.endsWith('sheet')) {
-                // xlsx files
-                window.preview_name = workbook.Strings[0]['t'];
-                for (name of workbook.Strings) {
-                    pushName(name['t']);
-                };
-            };
+            }
             generatePreview(window.preview_name, hPos=window.certprev_h_val, vPos=window.certprev_v_val);
         };
         reader.readAsArrayBuffer(file);
-    };
+    }
 };
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =

@@ -24,7 +24,7 @@ $(function() {
     $('#btn-edit-cert').click(function() {
         let modal_id = $(this).attr('data-modal-id');
         $('#'+modal_id).addClass('is-active');
-        generatePreview(window.preview_name, hPos=window.certprev_h_val, vPos=window.certprev_v_val, textAlign=window.text_align);
+        generatePreview(window.preview_name, hPos=window.certprev_h_val, vPos=window.certprev_v_val, textAlign=window.text_align, window.font_style, window.font_size, window.font_family, window.font_color);
     });
 
     $('.modal-close, .modal-background, .confirm-cancel, .confirm-yes, .cancel-edit').click(function() {

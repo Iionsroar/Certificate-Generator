@@ -28,6 +28,15 @@ function generatePreview(name, hPos=50, vPos=62.5, textAlign='center', imgSelect
         // apply changes to edit modal
         $("img#edit_preview").attr('src', $('canvas')[0].toDataURL('image/png', 1));
         $('#certificate-thumb .dropbox').hide();
+
+        const doc = new jsPDF({
+            orientation: "landscape",
+            unit: "px",
+            format: [480, 320]
+        });
+        doc.addImage($('canvas')[0].toDataURL('image/png', 1), "JPEG", 0, 0, 480, 320);
+        doc.save("sample.pdf");
+
     };
 };
 

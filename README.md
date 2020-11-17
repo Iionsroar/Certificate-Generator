@@ -33,3 +33,24 @@ Web application for generating certificates from a list of names (file formats: 
 #### III. New (Not Pushed)
 1. Bugs when reading csv and xlsx files
 2. When first set of names is added,change file upload text to: Add another file etc.
+
+
+
+
+
+Traps and Deadlines --------------------------------------------
+
+#### PLAN
+A. ojt does full image generation function, w/ print and png to pdf functionality as well as an optional pdf download
+
+B. lead lays final functionality framework as guide to ojt and does small bug fixes and code polishing
+	- NEW MODAL for storing high quality canvas, based on certificate image size
+	- NEW RIP-OFF generate function from generatePreview with a well designed structure, keeping in mind window variables and constants
+	- learn jsPDF, particularly how to import lol it's ughly complicated
+	see demo: http://raw.githack.com/MrRio/jsPDF/master/
+	https://github.com/MrRio/jsPDF
+	https://stackoverflow.com/questions/38587264/getting-error-uncaught-referenceerror-jspdf-is-not-defined/38631126
+	https://stackoverflow.com/questions/43333286/uncaught-referenceerror-jspdf-is-not-defined
+	https://stackoverflow.com/questions/42237388/syntaxerror-import-declarations-may-only-appear-at-top-level-of-a-module
+	https://jakearchibald.com/2017/es-modules-in-browsers/
+	

@@ -1,4 +1,4 @@
-let names = [];
+window.names = [];
 let $card1 = $('.column .is-4 .card').eq(0);
 let $card2 = $('.column .is-4 .card').eq(1);
 
@@ -9,6 +9,11 @@ window.font_style = 'bold';
 window.font_size = 18;
 window.font = 'Merriweather';
 //window.fontColor = '#000000';
+
+// NEW variables (for generating hq certificates)
+window.templateURL;
+window.templateDimension = ["0", "0"]; // [width, height]
+
 
 $(function() {
     // previewing images using modal
@@ -60,7 +65,7 @@ $(function() {
         $card.toggleClass('border-is-dark border-is-mint');
         $card_content.toggleClass('border-is-dark border-is-mint');
         $card.find('.tag.lbl').toggleClass('is-dark is-mint');
-        if (names.length) {
+        if (window.names.length) {
             $card.find('.dropdown').removeClass('is-hidden');
         } else {
             $card.find('.dropdown').addClass('is-hidden');
@@ -70,6 +75,7 @@ $(function() {
     // removing uploaded files
     $('.card').delegate('.remove-content', 'click',  function() {
         if ($(this).attr('data-type-to-remove') == 'img') {
+            resetTemplate(); // NEW
             let $card_image = $('#' + $(this).attr('data-card-img-id'));
             let $img = $card_image.find('img.drop');
 
@@ -90,14 +96,14 @@ $(function() {
             let $item = $(this).closest('.dropdown-item');
             let $card = $item.closest('.card');
             let name_index = $item.index();
-            names.splice(name_index, 1);
+            window.names.splice(name_index, 1);
             window.preview_name = names[0];
 
             let val = Number($('#names-counter').val());
             $('#names-counter').val(val - 1).trigger('change');
 
             $item.remove();
-            if (names.length) {
+            if (window.names.length) {
                 generatePreview(window.preview_name, hPos=window.certprev_h_val, vPos=window.certprev_v_val, textAlign=window.text_align);
             } else {
                 $card.find('.tag.lbl').show();
@@ -125,6 +131,7 @@ $(function() {
     // img error handler
     $('#template-thumb img.drop').on('error', function() {
         $link_template.val('');
+        resetTemplate(); // NEW
 
         let $card = $(this).closest('.card');
         let $card_image = $('#' + $(this).attr('data-card-img-id'));
@@ -147,6 +154,7 @@ $(function() {
         let card_image_id = $(this).attr('data-card-img-id');
 
         let $dropPreview = $('#'+card_image_id + ' figure img');
+        setTemplate(URL.createObjectURL(file)); // NEW
         addImg($dropPreview, URL.createObjectURL(file));
     });
 
@@ -155,6 +163,7 @@ $(function() {
     $link_template.change(function() {
         let card_image_id = $(this).attr('data-card-img-id');
         let $dropPreview = $('#'+card_image_id + ' figure img');
+        setTemplate($(this).val()); // NEW
         addImg($dropPreview, $(this).val());
     });
 
@@ -212,6 +221,9 @@ $(function() {
     const callback = function(mutation_list, observer) {
         for (let mutation of mutation_list) {
             if (mutation.type === 'attributes') {
+                // if ($('#loader-modal').hasClass('is-active')) {
+                //     generate();
+                // } else 
                 if ($card1.hasClass('border-is-dark') && $card2.hasClass('border-is-dark')) {
                     $('#generate').removeClass('is-hidden');
                     $('#btn-edit-cert').removeClass('is-hidden');
@@ -227,7 +239,32 @@ $(function() {
     const content_observer = new MutationObserver(callback);
     content_observer.observe(card1, changes);
     content_observer.observe(card2, changes);
+    // content_observer.observe(loader, changes);
     content_observer.observe($('#template-thumb img')[0], changes);
 
-    // TODO: clicking generate button triggers the placeholder modal of editing certificate
+
+
+    // GENERATE
+    $('#generate').on('click', function() {
+        $('#loader-modal').addClass('is-active');
+        setTimeout(function() {
+            generate();
+        }, 1);
+    });
+
+    // const loader = document.getElementsByClassName('loader-modal')[0];
+    // const callback2 = function(mutation_list, observer) {
+    //     for (let mutation of mutation_list) {
+    //         if (mutation.type === 'attributes') {
+    //             if ($('#loader-modal').hasClass('is-active')) {
+    //                 setTimeout(function() {
+    //                     generate()
+    //                 }, 5000);
+    //             }
+    //         };
+    //     };
+    // };
+    // const content_observer2 = new MutationObserver(callback2);
+    // content_observer2.observe(loader, changes);
+
 });

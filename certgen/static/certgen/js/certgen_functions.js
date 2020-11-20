@@ -28,15 +28,6 @@ function generatePreview(name, hPos=50, vPos=62.5, textAlign='center', imgSelect
         // apply changes to edit modal
         $("img#edit_preview").attr('src', $('canvas')[0].toDataURL('image/png', 1));
         $('#certificate-thumb .dropbox').hide();
-
-        const doc = new jsPDF({
-            orientation: "landscape",
-            unit: "px",
-            format: [480, 320]
-        });
-        doc.addImage($('canvas')[0].toDataURL('image/png', 1), "JPEG", 0, 0, 480, 320);
-        doc.save("sample.pdf");
-
     };
 };
 
@@ -54,6 +45,23 @@ function editsMade() {
     return editsMade;
 }
 
+function resetTemplate() {
+    window.templateURL = "";
+    window.templateDimension = ["0", "0"];
+}
+
+function setTemplate(src) {
+    window.templateURL = src;
+    
+    const templateImg = new Image();
+    templateImg.onload = function() {
+        window.templateDimension = [""+this.width, ""+this.height];
+        window.font_size = window.templateDimension[1] / 320 * 18 // Scaling font size on template height
+    }
+    templateImg.src = src;
+
+}
+
 function addImg(imgObj, src) {
     let $imgObj = imgObj;
     let $card_image = $('#'+$imgObj.attr('data-card-img-id'));
@@ -64,7 +72,7 @@ function addImg(imgObj, src) {
 function pushName(name) {
     let nameObj = {"name": name};
     let dropdown_template = $('#dropdown-item-template').html();
-    names.push(nameObj['name']);
+    window.names.push(nameObj['name']);
 
     $('#dropdown-name-items').append(Mustache.render(dropdown_template, nameObj));
     let val = Number($('#names-counter').val());
@@ -137,6 +145,7 @@ function dropHandler(ev, target) {
             }
             $('#paste-template').val('');
             let $dropPreview = $('#'+target.id + ' figure img');
+            setTemplate(URL.createObjectURL(file)); // NEW
             addImg($dropPreview, URL.createObjectURL(file));
         }
     };

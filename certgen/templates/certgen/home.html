@@ -8,7 +8,6 @@
 {% endblock %}
 
 {% block content %}
-<!-- TODO: new canvas, the size of the template image, for downloading high quality certificates <canvas></canvas> -->
 <div id="certificate-modal" class="modal">
   <div data-modal-id="certificate-modal" class="modal-background"></div>
   <div class="modal-content">
@@ -85,6 +84,7 @@
               <button class="button is-small">Italic</button>
               <button class="button is-small">None</button>
               <button class="button is-small is-dark is-selected">Bold</button>
+              <button class="button is-small">Underline</button>
             </div>
 
             <br><label for="text-align">Name Alignment: </label>
@@ -264,6 +264,23 @@
   <div class="column">
   </div>
 </div>
+
+<!-- TODO: new canvas, the size of the template image, for downloading high quality certificates <canvas></canvas> -->
+<div id="generator-modal" class="modal">
+  <div data-modal-id="generator-modal" class="modal-background"></div>
+  <div class="modal-content">
+    <canvas id="final-certificate" width="480" height="320"><p>none</p></canvas>
+  </div>
+  <button data-modal-id="generator-modal" class="modal-close is-large" aria-label="close"></button>
+</div>
+
+<!-- NEW: loader modal -->
+<div id="loader-modal" class="modal loader-modal">
+  <div data-modal-id="generator-modal" class="modal-background">
+    <div class="loader"></div> 
+    <p class="generator-progress"><span id="page-num">0</span>/<span id="names-total">0</span></p>
+  </div>
+</div>
 {% endblock %}
 
 {% block scripts %}
@@ -279,5 +296,6 @@
 <script src="{% static 'certgen/js/certgen_functions.js' %}"></script>
 <script src="{% static 'certgen/js/certgen.js' %}"></script>
 <script src="{% static 'certgen/js/edit-certificate.js' %}"></script>
+<script src="{% static 'certgen/js/hq-generator.js' %}"></script>
 
 {% endblock %}

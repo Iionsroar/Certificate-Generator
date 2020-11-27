@@ -80,7 +80,7 @@
             <input type="color" id="colorPicker">
 
             <br><br><label for="text-align">Font Style: </label>
-            <div id="" class="buttons has-addons inline-block">
+            <div id="font-style-buttons" class="buttons has-addons inline-block">
               <button class="button is-small">Italic</button>
               <button class="button is-small">None</button>
               <button class="button is-small is-dark is-selected">Bold</button>
@@ -173,8 +173,7 @@
     </div>
 
     <div class="has-text-weight-normal">
-        <!-- <a id="btn-edit-cert" class="is-hidden" data-modal-id="edit-certificate"><span class="tag is-medium is-dark is-mint-hover sharp-border"> -->
-        <a id="btn-edit-cert" class="" data-modal-id="edit-certificate"><span class="tag is-medium is-dark is-mint-hover sharp-border">
+        <a id="btn-edit-cert" class="is-hidden" data-modal-id="edit-certificate"><span class="tag is-medium is-dark is-mint-hover sharp-border">
             EDIT CERTIFICATE
         </span></a>
     </div>
@@ -224,7 +223,7 @@
           <template id="dropdown-item-template">
             <div class="dropdown-item is-dark">
                 <button data-type-to-remove="name" class="delete is-small remove-content"></button>&nbsp;
-                <span class="is-size-6">{{name}}</span> <!-- IDEA: make name item a button, when clicked it runs generatePreview({name_of_button}) -->
+                <span class="is-size-6">{{name}}</span> 
             </div>
           </template>
           {% endverbatim %}
@@ -245,7 +244,6 @@
               <input id="paste-names" type="text" data-card-img-id="template-thumb" class="input is-size-7 is-dark" placeholder="Paste comma-separated names here">
             </div>
             <div class="control">
-              <!-- TODO: add jquery to change button icon to loading when generating preview certificate -->
               <button class="button is-reverse-mint is-small"><i class="fa fa-check"></i></button>
             </div>
           </div>
@@ -265,7 +263,6 @@
   </div>
 </div>
 
-<!-- TODO: new canvas, the size of the template image, for downloading high quality certificates <canvas></canvas> -->
 <div id="generator-modal" class="modal">
   <div data-modal-id="generator-modal" class="modal-background"></div>
   <div class="modal-content">
@@ -284,13 +281,7 @@
 {% endblock %}
 
 {% block scripts %}
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.3/jszip.min.js"></script> -->
-<!-- <script>
-  let preview_name;
-  console.log(preview_name);
-</script> -->
 <script src="{% static 'certgen/js/jszip.min.js' %}"></script>
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.3/xlsx.js"></script> -->
 <script src="{% static 'certgen/js/xlsx.js' %}"></script>
 <script src="{% static 'certgen/js/certgen_fix.js' %}"></script>
 <script src="{% static 'certgen/js/certgen_functions.js' %}"></script>

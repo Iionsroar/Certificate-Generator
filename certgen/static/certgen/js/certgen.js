@@ -221,14 +221,10 @@ $(function() {
     const callback = function(mutation_list, observer) {
         for (let mutation of mutation_list) {
             if (mutation.type === 'attributes') {
-                // if ($('#loader-modal').hasClass('is-active')) {
-                //     generate();
-                // } else 
                 if ($card1.hasClass('border-is-dark') && $card2.hasClass('border-is-dark')) {
                     $('#generate').removeClass('is-hidden');
                     $('#btn-edit-cert').removeClass('is-hidden');
                     $('#edit-certificate.modal').addClass('is-active');
-                    // IDEA: also add a circular edit button at lower right that allows user to edit the font and vertical placeholder
                 } else {
                     $('#generate').addClass('is-hidden');
                     $('#btn-edit-cert').addClass('is-hidden');
@@ -239,10 +235,7 @@ $(function() {
     const content_observer = new MutationObserver(callback);
     content_observer.observe(card1, changes);
     content_observer.observe(card2, changes);
-    // content_observer.observe(loader, changes);
     content_observer.observe($('#template-thumb img')[0], changes);
-
-
 
     // GENERATE
     $('#generate').on('click', function() {
@@ -251,20 +244,4 @@ $(function() {
             generate();
         }, 1);
     });
-
-    // const loader = document.getElementsByClassName('loader-modal')[0];
-    // const callback2 = function(mutation_list, observer) {
-    //     for (let mutation of mutation_list) {
-    //         if (mutation.type === 'attributes') {
-    //             if ($('#loader-modal').hasClass('is-active')) {
-    //                 setTimeout(function() {
-    //                     generate()
-    //                 }, 5000);
-    //             }
-    //         };
-    //     };
-    // };
-    // const content_observer2 = new MutationObserver(callback2);
-    // content_observer2.observe(loader, changes);
-
 });

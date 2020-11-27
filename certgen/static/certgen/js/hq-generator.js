@@ -50,25 +50,28 @@ function generate(textAlign='center', imgSelector="#certificate-thumb img", font
         vPos = vPos / 100 * $canvas.attr('height');
         template.src = window.templateURL;
 
-        for (let i = 0; i < window.names.length; i++) {
-            setTimeout(function() { $('#page-num').text(i + 1) }, 0);
-            setTimeout(function() {
-                // ctx.clearRect(0, 0, $canvas.width(), $canvas.height());
-                ctx.drawImage(template, 0, 0, width, height);
+        template.onload = function () {
+            for (let i = 0; i < window.names.length; i++) {
+                setTimeout(function() { $('#page-num').text(i + 1) }, 0);
+                setTimeout(function() {
+                    // ctx.clearRect(0, 0, $canvas.width(), $canvas.height());
+                    ctx.drawImage(template, 0, 0, width, height);
 
-                ctx.font = 'bold ' + window.font_size + 'px '+ window.font;
-                ctx.textAlign = window.text_align;
-                ctx.fillText(window.names[i], hPos, vPos);
-                
-                doc.addImage($('canvas')[1].toDataURL('image/jpeg', 1), "JPEG", 0, 0, width, height);
-                doc.addPage();
-            }, 0);
+                    ctx.font = window.font_style + ' ' + window.font_size + 'px '+ window.font;
+                    console.log(ctx.font);
+                    ctx.textAlign = window.text_align;
+                    ctx.fillText(window.names[i], hPos, vPos);
+                    
+                    doc.addImage($('canvas')[1].toDataURL('image/jpeg', 1), "JPEG", 0, 0, width, height);
+                    doc.addPage();
+                }, 0);
+            }
         }
     };
     setTimeout(function() {
         doc.save("sample.pdf")
         $('#loader-modal').removeClass('is-active');
-    }, 1);
+    }, window.names.length * 100);
 };
 
 

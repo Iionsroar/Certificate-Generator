@@ -36,7 +36,49 @@
             <!-- TODO: update gencertprev settings for these below -->
             <!-- <label for="font-slider">Font Size: </label><input type="range" name="font-slider" id="font-slider" class="slider" min="1" max="100" value="18"> -->
 
-            <br><label for="dropdown-font-f">Font Family:</label>
+            <br><label for="dropdown-font-s">Font Size:</label>
+            <div id="dropdown-font-s" class="dropdown is-hoverable">
+              <div class="dropdown-trigger">
+                <a>
+                  <span class="tag is-medium is-dark is-mint-hover sharp-border" aria-haspopup="true" aria-controls="dropdown-menu4">
+                    <span class='selected-size'>18</span>
+                    <span class="icon is-small">
+                      <i class="fas fa-angle-down" aria-hidden="true"></i>
+                    </span>
+                  </span>
+                </a>
+              </div>
+              <div class="dropdown-menu is-dark" role="menu">
+                <div class="dropdown-content is-dark">
+                  <div class="dropdown-item is-dark">
+                    <span class="is-size-6">12</span>
+                  </div>
+                  <div class="dropdown-item is-dark">
+                    <span class="is-size-6">14</span>
+                  </div>
+                  <div class="dropdown-item is-dark">
+                    <span class="is-size-6">18</span>
+                  </div>
+                  <div class="dropdown-item is-dark">
+                    <span class="is-size-6">24</span>
+                  </div>
+                  <div class="dropdown-item is-dark">
+                    <span class="is-size-6">36</span>
+                  </div>
+                  <div class="dropdown-item is-dark">
+                    <span class="is-size-6">48</span>
+                  </div>
+                  <div class="dropdown-item is-dark">
+                    <span class="is-size-6">64</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <label for="colorPicker">Font Color:</label>
+            <input type="color" id="colorPicker">
+
+            <label for="dropdown-font-f">Font Family:</label>
             <div id="dropdown-font-f" class="dropdown is-hoverable">
               <div class="dropdown-trigger">
                 <a>
@@ -66,9 +108,6 @@
                     <span class="is-size-6">Monospace</span>
                   </div>
                   <div class="dropdown-item is-dark">
-                    <span class="is-size-6">Courier New</span>
-                  </div>
-                  <div class="dropdown-item is-dark">
                     <span class="is-size-6">Calibri</span>
                   </div>
                   <!-- TODO: search commonly used font families -->
@@ -77,14 +116,12 @@
               </div>
             </div>
 
-            <input type="color" id="colorPicker">
 
             <br><br><label for="text-align">Font Style: </label>
             <div id="font-style-buttons" class="buttons has-addons inline-block">
               <button class="button is-small">Italic</button>
               <button class="button is-small">None</button>
               <button class="button is-small is-dark is-selected">Bold</button>
-              <button class="button is-small">Underline</button>
             </div>
 
             <br><label for="text-align">Name Alignment: </label>

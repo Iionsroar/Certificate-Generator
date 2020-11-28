@@ -1,30 +1,55 @@
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = == 
 // TODO: TRY GEN PREVIEW sfunction generatePreview(name, imgSelector="#certificate-thumb img", hPos=50, vPos=62.5, fontSize='18px', font="serif", fontStyle='bold', textAlign='center') {
-function generatePreview(name, hPos=50, vPos=62.5, textAlign='center', imgSelector="#certificate-thumb img", font=window.font) {
-// function generatePreview(name, hPos=50, vPos=62.5, textAlign='center', imgSelector="#certificate-thumb img", font='Merriweather', fontColor='#000000') {
-    // run only when card1 is active
+// function generatePreview(name, hPos=50, vPos=62.5, textAlign='center', imgSelector="#certificate-thumb img", font=window.font) {
+// // function generatePreview(name, hPos=50, vPos=62.5, textAlign='center', imgSelector="#certificate-thumb img", font='Merriweather', fontColor='#000000') {
+//     // run only when card1 is active
+//     let $card1 = $('.column .is-4 .card').eq(0);
+//     if ($card1.hasClass('border-is-dark')) {
+//         let $canvas_preview = $('canvas#certificate-preview');
+//         hPos = hPos / 100 * $canvas_preview.attr('width');
+//         vPos = vPos / 100 * $canvas_preview.attr('height');
+
+//         let ctx = $('#certificate-preview')[0].getContext('2d');
+//         let template = new Image();
+//         template.src = $('#template-thumb img').attr('src');
+
+//         ctx.clearRect(0, 0, 480, 320);
+//         ctx.drawImage(template, 0, 0, 480, 320);
+
+//         ctx.font = 'bold 18px '+ font;
+//         ctx.textAlign = textAlign;
+//         // ctx.fillStyle = fontColor; //DOING NOW
+//         ctx.fillText(name, hPos, vPos);
+        
+
+//         $(imgSelector).attr('src', $('canvas')[0].toDataURL('image/png', 1)).show();
+//         // apply changes to edit modal
+//         $("img#edit_preview").attr('src', $('canvas')[0].toDataURL('image/png', 1));
+//         $('#certificate-thumb .dropbox').hide();
+//     };
+// };
+
+function generatePreview(name = window.preview_name) {
     let $card1 = $('.column .is-4 .card').eq(0);
     if ($card1.hasClass('border-is-dark')) {
         let $canvas_preview = $('canvas#certificate-preview');
-        hPos = hPos / 100 * $canvas_preview.attr('width');
-        vPos = vPos / 100 * $canvas_preview.attr('height');
+        hPos = window.certprev_h_val / 100 * $canvas_preview.attr('width');
+        vPos = window.certprev_v_val / 100 * $canvas_preview.attr('height');
 
-        // IDEA: code that scans image using js img library for the thickest space, suitable for adding lines
         let ctx = $('#certificate-preview')[0].getContext('2d');
         let template = new Image();
         template.src = $('#template-thumb img').attr('src');
 
-        // TODO: create another function for downloading final certificates, then edit canvas drawing size to the template's
         ctx.clearRect(0, 0, 480, 320);
         ctx.drawImage(template, 0, 0, 480, 320);
 
-        ctx.font = 'bold 18px '+ font;
-        ctx.textAlign = textAlign;
-        // ctx.fillStyle = fontColor; //DOING NOW
+        ctx.font = window.font_style + ' ' + window.font_size + 'px '+ window.font;
+        ctx.textAlign = window.text_align;
+        ctx.fillStyle = window.font_color; //DOING NOW
         ctx.fillText(name, hPos, vPos);
         
 
-        $(imgSelector).attr('src', $('canvas')[0].toDataURL('image/png', 1)).show();
+        $("#certificate-thumb img").attr('src', $('canvas')[0].toDataURL('image/png', 1)).show();
         // apply changes to edit modal
         $("img#edit_preview").attr('src', $('canvas')[0].toDataURL('image/png', 1));
         $('#certificate-thumb .dropbox').hide();
@@ -56,7 +81,7 @@ function setTemplate(src) {
     const templateImg = new Image();
     templateImg.onload = function() {
         window.templateDimension = [""+this.width, ""+this.height];
-        window.font_size = window.templateDimension[1] / 320 * 18 // Scaling font size on template height
+        // window.font_size = window.templateDimension[1] / 320 * 18 // Scaling font size on template height
     }
     templateImg.src = src;
 
@@ -93,20 +118,26 @@ function addNames(file) {
             var workbook = XLSX.read(data, {type: 'array'});
             let name;
             let is_first = true;
-            for (const [key, value] of Object.entries(workbook.Sheets.Sheet1)) {
-                if(key[0] == '!') {} // skip headers, meta etc.
-                else {
-                    if (file.type == "") { // for csv files
-                        name = value['v'];
-                    } else if (file.type.endsWith('sheet')) { // xlsx files
-                        name = (value['w']) ? value['w']:value['v'];
+            window.workbook = workbook;
+            for (const [sheetname, sheetvalues] of Object.entries(workbook.Sheets)) {
+                for (const [key, value] of Object.entries(sheetvalues)) {
+                // for (const [key, value] of Object.entries(workbook.Sheets.Sheet1)) {
+                    if(key[0] == '!') {} // skip headers, meta etc.
+                    else {
+                        if (file.type == "") { // for csv files
+                            name = value['v'];
+                        } else if (file.type.endsWith('sheet')) { // xlsx files
+                            name = (value['w']) ? value['w']:value['v'];
+                        }
+                        if (is_first) window.preview_name = name;
+                        pushName(name);
+                        is_first = false;
                     }
-                    if (is_first) window.preview_name = name;
-                    pushName(name);
-                    is_first = false;
                 }
+
             }
-            generatePreview(window.preview_name, hPos=window.certprev_h_val, vPos=window.certprev_v_val);
+            // generatePreview(window.preview_name, hPos=window.certprev_h_val, vPos=window.certprev_v_val);
+            generatePreview();
         };
         reader.readAsArrayBuffer(file);
     }

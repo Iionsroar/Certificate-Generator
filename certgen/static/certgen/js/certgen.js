@@ -8,7 +8,7 @@ window.text_align = 'center';
 window.font_style = 'bold';
 window.font_size = 18;
 window.font = 'Merriweather';
-//window.fontColor = '#000000';
+window.fontColor = '#000000';
 
 // NEW variables (for generating hq certificates)
 window.templateURL;
@@ -29,7 +29,8 @@ $(function() {
     $('#btn-edit-cert').click(function() {
         let modal_id = $(this).attr('data-modal-id');
         $('#'+modal_id).addClass('is-active');
-        generatePreview(window.preview_name, hPos=window.certprev_h_val, vPos=window.certprev_v_val, textAlign=window.text_align);
+        // generatePreview(window.preview_name, hPos=window.certprev_h_val, vPos=window.certprev_v_val, textAlign=window.text_align);
+        generatePreview();
     });
 
     $('.modal-close, .modal-background, .confirm-cancel, .confirm-yes, .cancel-edit').click(function() {
@@ -104,7 +105,8 @@ $(function() {
 
             $item.remove();
             if (window.names.length) {
-                generatePreview(window.preview_name, hPos=window.certprev_h_val, vPos=window.certprev_v_val, textAlign=window.text_align);
+                // generatePreview(window.preview_name, hPos=window.certprev_h_val, vPos=window.certprev_v_val, textAlign=window.text_align);
+                generatePreview();
             } else {
                 $card.find('.tag.lbl').show();
             };
@@ -125,7 +127,8 @@ $(function() {
         };
 
         if ($card1.hasClass('border-is-dark') && $card2.hasClass('border-is-dark')) {
-            generatePreview(window.preview_name, hPos=window.certprev_h_val, vPos=window.certprev_v_val);
+            // generatePreview(window.preview_name, hPos=window.certprev_h_val, vPos=window.certprev_v_val);
+            generatePreview();
         };
     });
     // img error handler
@@ -185,7 +188,8 @@ $(function() {
     $paste_names.change(function() {
         let names = $(this).val().match(/(\w[a-zA-Z .]*\w?[.]?)/g);
         addNames(names);
-        generatePreview(window.preview_name, hPos=window.certprev_h_val, vPos=window.certprev_v_val);
+        // generatePreview(window.preview_name, hPos=window.certprev_h_val, vPos=window.certprev_v_val);
+        generatePreview();
 
         $(this).val('added!');
         setTimeout(function() {
@@ -210,7 +214,8 @@ $(function() {
     $('.card').delegate('#dropdown-names .dropdown-item span', 'click',  function() {
         let name = $(this).html();
         window.preview_name = name;
-        generatePreview(window.preview_name, hPos=window.certprev_h_val, vPos=window.certprev_v_val, textAlign=window.text_align);
+        // generatePreview(window.preview_name, hPos=window.certprev_h_val, vPos=window.certprev_v_val, textAlign=window.text_align);
+        generatePreview();
     });
 
     // = = = = = = = = = = = = = = = = = = = = = = = = =

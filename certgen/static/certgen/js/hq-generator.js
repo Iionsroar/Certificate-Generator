@@ -57,9 +57,9 @@ function generate(textAlign='center', imgSelector="#certificate-thumb img", font
                     // ctx.clearRect(0, 0, $canvas.width(), $canvas.height());
                     ctx.drawImage(template, 0, 0, width, height);
 
-                    ctx.font = window.font_style + ' ' + window.font_size + 'px '+ window.font;
-                    console.log(ctx.font);
+                    ctx.font = window.font_style + ' ' + (window.templateDimension[1] / 320 * window.font_size) + 'px '+ window.font;
                     ctx.textAlign = window.text_align;
+                    ctx.fillStyle = window.font_color;
                     ctx.fillText(window.names[i], hPos, vPos);
                     
                     doc.addImage($('canvas')[1].toDataURL('image/jpeg', 1), "JPEG", 0, 0, width, height);

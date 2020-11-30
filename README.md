@@ -11,10 +11,9 @@ Web application for generating certificates from a list of names (file formats: 
 
 
 ## TO DO
+1. Deployment
 0. Global variables
 1. Clicking from dropdown
-1. Deployment
-2. Buttons with unavailable functionalities
 
 #### I. Edit-Certificate
 2. Setup font style setting

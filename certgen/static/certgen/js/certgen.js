@@ -8,7 +8,7 @@ window.text_align = 'center';
 window.font_style = 'bold';
 window.font_size = 18;
 window.font = 'Merriweather';
-window.fontColor = '#000000';
+window.font_color = '#000000';
 
 // NEW variables (for generating hq certificates)
 window.templateURL;
@@ -168,6 +168,8 @@ $(function() {
         let $dropPreview = $('#'+card_image_id + ' figure img');
         setTemplate($(this).val()); // NEW
         addImg($dropPreview, $(this).val());
+
+        // $('.paste-content button')
     });
 
     // = = = = = = = = = = = = = = = = = = = = = = = =

@@ -63,12 +63,6 @@ $(function() {
     });
 
     $('#apply-edit').on('click', function() {
-        // window.certprev_v_val = window.temp_v_val;
-        // window.certprev_h_val = window.temp_h_val;
-        // window.text_align = window.temp_align;
-        // window.font = window.temp_font;
-        // window.font_style = window.temp_style
-        // generatePreview(window.preview_name, hPos=window.certprev_h_val, vPos=window.certprev_v_val, textAlign=window.text_align, imgSelector="#certificate-thumb img", font=window.font);
         generatePreview();
         $(this).closest('.modal').removeClass('is-active');
     });
@@ -88,12 +82,9 @@ $(function() {
         $('#text-align-buttons').find('.is-selected').removeClass('is-dark is-selected');
         $('#font-style-buttons').find('.is-selected').removeClass('is-dark is-selected');
 
-        // TODO, DEBUGGING: window.text_align has bugs wtf
         let align = window.text_align[0].toUpperCase() + window.text_align.slice(1);
         let style = window.font_style[0].toUpperCase() + window.font_style.slice(1);
         $('#text-align-buttons button:contains(' + align + ')').addClass('is-dark is-selected');
         $('#font-style-buttons button:contains(' + style + ')').addClass('is-dark is-selected');
-        // v_slider.val = window.certprev_v_val;
-        // TODO: selected button for text_align;
     });
 });

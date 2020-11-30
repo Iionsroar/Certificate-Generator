@@ -81,7 +81,6 @@ function setTemplate(src) {
     const templateImg = new Image();
     templateImg.onload = function() {
         window.templateDimension = [""+this.width, ""+this.height];
-        // window.font_size = window.templateDimension[1] / 320 * 18 // Scaling font size on template height
     }
     templateImg.src = src;
 
@@ -121,7 +120,6 @@ function addNames(file) {
             window.workbook = workbook;
             for (const [sheetname, sheetvalues] of Object.entries(workbook.Sheets)) {
                 for (const [key, value] of Object.entries(sheetvalues)) {
-                // for (const [key, value] of Object.entries(workbook.Sheets.Sheet1)) {
                     if(key[0] == '!') {} // skip headers, meta etc.
                     else {
                         if (file.type == "") { // for csv files

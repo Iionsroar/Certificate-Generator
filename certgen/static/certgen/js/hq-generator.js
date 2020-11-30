@@ -54,7 +54,6 @@ function generate(textAlign='center', imgSelector="#certificate-thumb img", font
             for (let i = 0; i < window.names.length; i++) {
                 setTimeout(function() { $('#page-num').text(i + 1) }, 0);
                 setTimeout(function() {
-                    // ctx.clearRect(0, 0, $canvas.width(), $canvas.height());
                     ctx.drawImage(template, 0, 0, width, height);
 
                     ctx.font = window.font_style + ' ' + (window.templateDimension[1] / 320 * window.font_size) + 'px '+ window.font;

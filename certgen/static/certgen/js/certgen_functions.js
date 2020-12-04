@@ -44,6 +44,23 @@ function editsMade() {
     return editsMade;
 }
 
+function resetTemplate() {
+    window.templateURL = "";
+    window.templateDimension = ["0", "0"];
+}
+
+function setTemplate(src) {
+    window.templateURL = src;
+    
+    const templateImg = new Image();
+    templateImg.onload = function() {
+        window.templateDimension = [""+this.width, ""+this.height];
+        window.font_size = window.templateDimension[1] / 320 * 18 // Scaling font size on template height
+    }
+    templateImg.src = src;
+
+}
+
 function addImg(imgObj, src) {
     let $imgObj = imgObj;
     let $card_image = $('#'+$imgObj.attr('data-card-img-id'));
@@ -74,22 +91,20 @@ function addNames(file) {
             var data = new Uint8Array(e.target.result);
             var workbook = XLSX.read(data, {type: 'array'});
             let name;
-            if (file.type.endsWith('ms-excel')) {
-                // csv files
-                let is_first = true;
-                for (const [key, value] of Object.entries(workbook.Sheets.Sheet1)) {
-                    name = (value['w']) ? value['w']:value['v'];
+            let is_first = true;
+            for (const [key, value] of Object.entries(workbook.Sheets.Sheet1)) {
+                if(key[0] == '!') {} // skip headers, meta etc.
+                else {
+                    if (file.type == "") { // for csv files
+                        name = value['v'];
+                    } else if (file.type.endsWith('sheet')) { // xlsx files
+                        name = (value['w']) ? value['w']:value['v'];
+                    }
                     if (is_first) window.preview_name = name;
                     pushName(name);
                     is_first = false;
                 }
-            } else if (file.type.endsWith('sheet')) {
-                // xlsx files
-                window.preview_name = workbook.Strings[0]['t'];
-                for (name of workbook.Strings) {
-                    pushName(name['t']);
-                };
-            };
+            }
             generatePreview(window.preview_name, hPos=window.certprev_h_val, vPos=window.certprev_v_val);
         };
         reader.readAsArrayBuffer(file);
@@ -129,6 +144,7 @@ function dropHandler(ev, target) {
             }
             $('#paste-template').val('');
             let $dropPreview = $('#'+target.id + ' figure img');
+            setTemplate(URL.createObjectURL(file)); // NEW
             addImg($dropPreview, URL.createObjectURL(file));
         }
     };

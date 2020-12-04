@@ -273,6 +273,22 @@
   <div class="column">
   </div>
 </div>
+
+  <div id="generator-modal" class="modal">
+  <div data-modal-id="generator-modal" class="modal-background"></div>
+  <div class="modal-content">
+    <canvas id="final-certificate" width="480" height="320"><p>none</p></canvas>
+  </div>
+  <button data-modal-id="generator-modal" class="modal-close is-large" aria-label="close"></button>
+</div>
+
+<!-- NEW: loader modal -->
+<div id="loader-modal" class="modal loader-modal">
+  <div data-modal-id="generator-modal" class="modal-background">
+    <div class="loader"></div> 
+    <p class="generator-progress"><span id="page-num">0</span>/<span id="names-total">0</span></p>
+  </div>
+</div>
 {% endblock %}
 
 {% block scripts %}

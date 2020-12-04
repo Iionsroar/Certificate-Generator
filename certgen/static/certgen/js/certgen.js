@@ -1,4 +1,4 @@
-let names = [];
+window.names = [];
 let $card1 = $('.column .is-4 .card').eq(0);
 let $card2 = $('.column .is-4 .card').eq(1);
 
@@ -9,6 +9,8 @@ window.font_style = 'bold';
 window.font_size = 18;
 window.font_family = 'Merriweather';
 window.font_color = '#000000';
+window.templateURL;
+window.templateDimension = ["0" , "0"];
 
 $(function() {
     // previewing images using modal
@@ -70,6 +72,7 @@ $(function() {
     // removing uploaded files
     $('.card').delegate('.remove-content', 'click',  function() {
         if ($(this).attr('data-type-to-remove') == 'img') {
+            resetTemplate(); // NEW
             let $card_image = $('#' + $(this).attr('data-card-img-id'));
             let $img = $card_image.find('img.drop');
 
@@ -125,6 +128,7 @@ $(function() {
     // img error handler
     $('#template-thumb img.drop').on('error', function() {
         $link_template.val('');
+        resetTemplate(); // NEW
 
         let $card = $(this).closest('.card');
         let $card_image = $('#' + $(this).attr('data-card-img-id'));
@@ -147,6 +151,7 @@ $(function() {
         let card_image_id = $(this).attr('data-card-img-id');
 
         let $dropPreview = $('#'+card_image_id + ' figure img');
+        setTemplate(URL.createObjectURL(file)); // NEW
         addImg($dropPreview, URL.createObjectURL(file));
     });
 
@@ -155,14 +160,16 @@ $(function() {
     $link_template.change(function() {
         let card_image_id = $(this).attr('data-card-img-id');
         let $dropPreview = $('#'+card_image_id + ' figure img');
+        setTemplate($(this).val()); // NEW
         addImg($dropPreview, $(this).val());
     });
 
     // = = = = = = = = = = = = = = = = = = = = = = = =
-    // namesfile uplaod
+    // namesfile upload
     let $upload_namesfile = $('#upload-namesfile');
     $upload_namesfile.change(function() {
         const fileList = this.files;
+        window.fileList = fileList;
         $.each(fileList, function(i, file) {
             addNames(fileList[i]);
         });
@@ -229,4 +236,12 @@ $(function() {
     content_observer.observe($('#template-thumb img')[0], changes);
 
     // TODO: clicking generate button triggers the placeholder modal of editing certificate
+    // GENERATE
+    $('#generate').on('click', function() {
+        $('#loader-modal').addClass('is-active');
+        setTimeout(function() {
+            generate();
+        }, 1);
+});
+
 });

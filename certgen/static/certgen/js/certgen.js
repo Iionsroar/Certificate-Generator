@@ -72,7 +72,7 @@ $(function() {
     // removing uploaded files
     $('.card').delegate('.remove-content', 'click',  function() {
         if ($(this).attr('data-type-to-remove') == 'img') {
-            resetTemplate(); // NEW
+            resetTemplate();
             let $card_image = $('#' + $(this).attr('data-card-img-id'));
             let $img = $card_image.find('img.drop');
 
@@ -128,7 +128,7 @@ $(function() {
     // img error handler
     $('#template-thumb img.drop').on('error', function() {
         $link_template.val('');
-        resetTemplate(); // NEW
+        resetTemplate();
 
         let $card = $(this).closest('.card');
         let $card_image = $('#' + $(this).attr('data-card-img-id'));
@@ -151,7 +151,7 @@ $(function() {
         let card_image_id = $(this).attr('data-card-img-id');
 
         let $dropPreview = $('#'+card_image_id + ' figure img');
-        setTemplate(URL.createObjectURL(file)); // NEW
+        setTemplate(URL.createObjectURL(file));
         addImg($dropPreview, URL.createObjectURL(file));
     });
 
@@ -160,7 +160,7 @@ $(function() {
     $link_template.change(function() {
         let card_image_id = $(this).attr('data-card-img-id');
         let $dropPreview = $('#'+card_image_id + ' figure img');
-        setTemplate($(this).val()); // NEW
+        setTemplate($(this).val());
         addImg($dropPreview, $(this).val());
     });
 
@@ -235,8 +235,8 @@ $(function() {
     content_observer.observe(card2, changes);
     content_observer.observe($('#template-thumb img')[0], changes);
 
-    // TODO: clicking generate button triggers the placeholder modal of editing certificate
-    // GENERATE
+    
+    // GENERATE BUTTON
     $('#generate').on('click', function() {
         $('#loader-modal').addClass('is-active');
         setTimeout(function() {

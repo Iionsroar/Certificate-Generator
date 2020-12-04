@@ -1,14 +1,17 @@
 let ctx = $('#final-certificate')[0].getContext('2d');
 let template = new Image();
 
-function generate(textAlign='center', imgSelector="#certificate-thumb img", font=window.font_family, fontColor=window.font_color, fontSize=window.font_size) {
+function generate(textAlign='center', imgSelector="#certificate-thumb img", font='Merriweather', fontColor='#000000', fontSize='18') {
     $('#names-total').text("" + window.names.length);
-    //let ctx = $('#final-certificate')[0].getContext('2d');
-    //let template = new Image();
     width = window.templateDimension[0];
     height = window.templateDimension[1];
-    hPos = window.certprev_h_val
-    vPos = window.certprev_v_val
+    hPos = window.certprev_h_val;
+    vPos = window.certprev_v_val;
+    font = window.font_family;
+    fontColor = window.font_color;
+    fontSize = window.font_size;
+    textAlign = window.text_align;
+
 
     const doc = new jsPDF({
         orientation: "landscape",
@@ -32,8 +35,10 @@ function generate(textAlign='center', imgSelector="#certificate-thumb img", font
                 // ctx.clearRect(0, 0, $canvas.width(), $canvas.height());
                 ctx.drawImage(template, 0, 0, width, height);
 
-                ctx.font = 'bold ' + window.font_size + 'px '+ window.font_family;
+                ctx.font = 'bold ' + fontSize + 'px '+ window.font_family;
+                console.log(fontSize);
                 ctx.textAlign = window.text_align;
+                ctx.fillStyle = window.font_color;
                 ctx.fillText(window.names[i], hPos, vPos);
                 
                 doc.addImage($('canvas')[1].toDataURL('image/jpeg', 1), "JPEG", 0, 0, width, height);

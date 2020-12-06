@@ -9,7 +9,7 @@ function generate(textAlign='center', imgSelector="#certificate-thumb img", font
     vPos = window.certprev_v_val;
     font = window.font_family;
     fontColor = window.font_color;
-    fontSize = window.font_size;
+    //fontSize = window.font_size;
     textAlign = window.text_align;
 
 
@@ -35,7 +35,7 @@ function generate(textAlign='center', imgSelector="#certificate-thumb img", font
                 // ctx.clearRect(0, 0, $canvas.width(), $canvas.height());
                 ctx.drawImage(template, 0, 0, width, height);
 
-                ctx.font = 'bold ' + fontSize + 'px '+ window.font_family;
+                ctx.font = 'bold ' + window.font_size + 'px '+ window.font_family;
                 console.log(fontSize);
                 ctx.textAlign = window.text_align;
                 ctx.fillStyle = window.font_color;

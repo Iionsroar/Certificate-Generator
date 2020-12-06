@@ -24,7 +24,6 @@ function generatePreview(name, hPos=50, vPos=62.5, textAlign='center', imgSelect
         
 
         $(imgSelector).attr('src', $('canvas')[0].toDataURL('image/png', 1)).show();
-        // apply changes to edit modal
         $("img#edit_preview").attr('src', $('canvas')[0].toDataURL('image/png', 1));
         $('#certificate-thumb .dropbox').hide();
     };
